@@ -8,9 +8,7 @@ function App() {
 //test
   return (
     <>
-     <Routes>
-      
-     </Routes>
+    <h1>HI</h1>
     </>
   )
 }
