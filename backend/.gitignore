@@ -14,6 +14,7 @@ dist-ssr
 /.env
 /package-lock.json
 permissions.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
