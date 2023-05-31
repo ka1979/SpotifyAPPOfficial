@@ -152,7 +152,7 @@ router.get('/callback', function(req, res) {
             item.track.artists.forEach(artist => artists.push(artist.name))
             ret.push({title: item.track.name, artists: artists, image: item.track.album.images[1].url})
           })
-          console.log("Finished Array of Liked Songs:", ret);
+          // console.log("Finished Array of Liked Songs:", ret);
           console.log("==========================================================")
         });
 
@@ -180,21 +180,30 @@ router.get('/callback', function(req, res) {
         // get top artists long term
         request.get(topArtistsLongTermOptions, function(error, response, body) {
           console.log("TOP ARTISTS LONG TERM:");
-          //console.log(body);
+          let ret = [];
+          body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+          // console.log(body);
+          console.log("finished artists: ", ret)
           console.log("==========================================================")
         });
 
         // get top artists medium term
         request.get(topArtistsMediumTermOptions, function(error, response, body) {
           console.log("TOP ARTISTS MEDIUM TERM:");
-          //console.log(body);
+          let ret = [];
+          body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+          // console.log(body);
+          console.log("finished artists: ", ret)
           console.log("==========================================================")
         });
 
         // get top artists short term
         request.get(topArtistsShortTermOptions, function(error, response, body) {
           console.log("TOP ARTISTS SHORT TERM:");
-          //console.log(body);
+          let ret = [];
+          body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+          // console.log(body);
+          console.log("finished artists: ", ret)
           console.log("==========================================================")
         });
 
