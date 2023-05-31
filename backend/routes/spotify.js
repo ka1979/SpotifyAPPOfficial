@@ -159,6 +159,15 @@ router.get('/callback', function(req, res) {
         // get top songs long term
         request.get(topSongsLongTermOptions, function(error, response, body) {
           console.log("TOP SONGS LONG TERM:");
+          const items = body.items;
+          let ret = [];
+          items.forEach(item => {
+            let artists = []
+            item.artists.forEach(artist => artists.push(artist.name))
+            ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
+            // console.log(item);
+          })
+          console.log("ret", ret);
           //console.log(body);
           console.log("==========================================================")
         });
@@ -166,6 +175,15 @@ router.get('/callback', function(req, res) {
         // get top songs medium term
         request.get(topSongsMediumTermOptions, function(error, response, body) {
           console.log("TOP SONGS MEDIUM TERM:");
+          const items = body.items;
+          let ret = [];
+          items.forEach(item => {
+            let artists = []
+            item.artists.forEach(artist => artists.push(artist.name))
+            ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
+            // console.log(item);
+          })
+          console.log("ret", ret);
           //console.log(body);
           console.log("==========================================================")
         });
@@ -173,6 +191,15 @@ router.get('/callback', function(req, res) {
         // get top songs short term
         request.get(topSongsShortTermOptions, function(error, response, body) {
           console.log("TOP SONGS SHORT TERM:");
+          const items = body.items;
+          let ret = [];
+          items.forEach(item => {
+            let artists = []
+            item.artists.forEach(artist => artists.push(artist.name))
+            ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
+            // console.log(item);
+          })
+          console.log("ret", ret);
           //console.log(body);
           console.log("==========================================================")
         });
@@ -183,7 +210,7 @@ router.get('/callback', function(req, res) {
           let ret = [];
           body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
           // console.log(body);
-          console.log("finished artists: ", ret)
+          // console.log("finished artists: ", ret)
           console.log("==========================================================")
         });
 
@@ -193,7 +220,7 @@ router.get('/callback', function(req, res) {
           let ret = [];
           body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
           // console.log(body);
-          console.log("finished artists: ", ret)
+          // console.log("finished artists: ", ret)
           console.log("==========================================================")
         });
 
@@ -203,7 +230,7 @@ router.get('/callback', function(req, res) {
           let ret = [];
           body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
           // console.log(body);
-          console.log("finished artists: ", ret)
+          // console.log("finished artists: ", ret)
           console.log("==========================================================")
         });
 
