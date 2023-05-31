@@ -1,16 +1,33 @@
-import Navbar from './Navbar'
-const Login=()=>{
+import LoginIcon from '@mui/icons-material/Login';
+import { styled, Button } from '@mui/material';
 
+const Login = () => {
+    const LoginButton = styled(Button)(({ theme }) => ({
+        color: 'black',
+        fontWeight: 'bold',
+        "&:hover": {
+            color: theme.palette.secondary.main,
+            boxShadow: '0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7',
+        },
+        "&:focus": {
+            outline: "none",
+        },
+        height: "30px",
+        margin: "0 10px",
+    }));
 
+    const handleLogin = () => {
+        window.location.href = 'http://localhost:3000/spotify/callback';
+    }
 
-    return  (
-        <>
-        <Navbar/>
-       
-
-        <img src={"https://images.squarespace-cdn.com/content/v1/59a6fd41bebafb8b3f420544/1519917998014-G6SW42V49ZA7JSDOZJN3/image-asset.png?format=1000w"}></img>
+    return (
+        <>  
+            <LoginButton onClick={handleLogin}>
+                <LoginIcon />
+                Login with Spotify 
+            </LoginButton>
         </>
-
     )
 }
+
 export default Login;
