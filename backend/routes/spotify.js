@@ -39,7 +39,7 @@ var generateRandomString = function(length) {
 router.get('/login', function(req, res) {
 
   var state = generateRandomString(16);
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private user-read-email user-top-read user-library-read';
 
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
@@ -54,7 +54,6 @@ router.get('/login', function(req, res) {
 router.get('/callback', function(req, res) {
 
   var code = req.query.code || null;
-  console.log("code: ", code);
   var state = req.query.state || null;
 
   if (state === null) {
@@ -79,18 +78,113 @@ router.get('/callback', function(req, res) {
     request.post(authOptions, function(error, response, body) {
       if (!error && response.statusCode === 200) {
 
+        console.log("Access Token:", body.access_token);
+
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
 
-        var options = {
+        var meOptions = {
           url: 'https://api.spotify.com/v1/me',
           headers: { 'Authorization': 'Bearer ' + access_token },
           json: true
         };
 
+        var likedSongsOptions = {
+          url: 'https://api.spotify.com/v1/me/tracks?market=US&limit=50&offset=0',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+
+        var topSongsLongTermOptions = {
+          url: 'https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50&offset=0',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+
+        var topSongsMediumTermOptions = {
+          url: 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50&offset=0',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+
+        var topSongsShortTermOptions = {
+          url: 'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=50&offset=0',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+
+        var topArtistsLongTermOptions = {
+          url: 'https://api.spotify.com/v1/me/top/artists?time_range=long_term&limit=30&offset=0',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+
+        var topArtistsMediumTermOptions = {
+          url: 'https://api.spotify.com/v1/me/top/artists?time_range=medium_term&limit=20&offset=0',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+
+        var topArtistsShortTermOptions = {
+          url: 'https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=10&offset=0',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+
         // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
-          console.log(body);
+        request.get(meOptions, function(error, response, body) {
+          console.log("ME:");
+          //console.log(body);
+          console.log("==========================================================")
+        });
+
+        // get liked songs
+        request.get(likedSongsOptions, function(error, response, body) {
+          console.log("LIKED SONGS:");
+          //console.log(body);
+          console.log("==========================================================")
+        });
+
+        // get top songs long term
+        request.get(topSongsLongTermOptions, function(error, response, body) {
+          console.log("TOP SONGS LONG TERM:");
+          //console.log(body);
+          console.log("==========================================================")
+        });
+
+        // get top songs medium term
+        request.get(topSongsMediumTermOptions, function(error, response, body) {
+          console.log("TOP SONGS MEDIUM TERM:");
+          //console.log(body);
+          console.log("==========================================================")
+        });
+
+        // get top songs short term
+        request.get(topSongsShortTermOptions, function(error, response, body) {
+          console.log("TOP SONGS SHORT TERM:");
+          //console.log(body);
+          console.log("==========================================================")
+        });
+
+        // get top artists long term
+        request.get(topArtistsLongTermOptions, function(error, response, body) {
+          console.log("TOP ARTISTS LONG TERM:");
+          //console.log(body);
+          console.log("==========================================================")
+        });
+
+        // get top artists medium term
+        request.get(topArtistsMediumTermOptions, function(error, response, body) {
+          console.log("TOP ARTISTS MEDIUM TERM:");
+          //console.log(body);
+          console.log("==========================================================")
+        });
+
+        // get top artists short term
+        request.get(topArtistsShortTermOptions, function(error, response, body) {
+          console.log("TOP ARTISTS SHORT TERM:");
+          //console.log(body);
+          console.log("==========================================================")
         });
 
         // we can also pass the token to the browser to make requests from there
