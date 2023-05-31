@@ -132,16 +132,27 @@ router.get('/callback', function(req, res) {
         };
 
         // use the access token to access the Spotify Web API
+        // TODO: need to make this one run first
         request.get(meOptions, function(error, response, body) {
           console.log("ME:");
           //console.log(body);
           console.log("==========================================================")
+          // check if user is in database
+            // if no, create user
+          // then, update fields
         });
 
         // get liked songs
         request.get(likedSongsOptions, function(error, response, body) {
           console.log("LIKED SONGS:");
-          //console.log(body);
+          const items = body.items;
+          let ret = [];
+          items.forEach(item => {
+            let artists = []
+            item.track.artists.forEach(artist => artists.push(artist.name))
+            ret.push({title: item.track.name, artists: artists, image: item.track.album.images[1].url})
+          })
+          console.log("Finished Array of Liked Songs:", ret);
           console.log("==========================================================")
         });
 
