@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from './components/Navbar';
@@ -30,6 +31,29 @@ function App() {
       </>
     )
   }
+=======
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { Routes, Route } from "react-router-dom";
+import Login from './components/login';
+import PageNotFound from './components/PageNotFound/PageNotFound';
+function App() {
+  const [count, setCount] = useState(0)
+  const [loggedIn, setLoggedIN]=useState(false)
+  return (
+    <>
+     <Routes>
+     <Route path="/" element={<Login />} />
+  
+
+     <Route path="*" element={<PageNotFound />} />
+     </Routes>
+    </>
+  )
+}
+>>>>>>> ef67a54974cdf3f90c5ecc1595c67a63b1f9e030
 
 export default App;
   

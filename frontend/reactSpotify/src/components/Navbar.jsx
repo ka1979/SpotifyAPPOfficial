@@ -13,6 +13,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 // import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Stack from '@mui/material/Stack';
+import { Person2Icon  } from '@mui/material';
 
 const NavigationLink = styled(RouterLink)(({ theme }) => ({
   textDecoration: "none",
@@ -116,6 +117,10 @@ const NavigationBar = () => {
                   <NavigationLink to="/forums">
                     <NavigationButton>Forums</NavigationButton>
                   </NavigationLink>
+                  <NavigationLink to="/profile">
+                    <Person2Icon sx={{ color: 'white' }}/>
+                  </NavigationLink>
+
                 </StyledStack>
               </SwipeableDrawer>
             </>
