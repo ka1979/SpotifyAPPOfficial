@@ -1,10 +1,9 @@
 import React from "react";
-import { useParams, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import NavigationBar from "./Navbar";
+import { Button } from "@mui/material";
 
-export default function HomeSY() {
+export default function LandingPage() {
   const hash = window.location.hash.substr(1);
 
   // Parse the hash string into an object
@@ -17,8 +16,6 @@ export default function HomeSY() {
   // Extract the access_token and refresh_token
   const accessToken = hashParams.access_token;
   const refreshToken = hashParams.refresh_token;
-
-  // if not access and not refresh => route to normal home page
 
   const [email, setEmail] = useState("");
 
@@ -33,12 +30,17 @@ export default function HomeSY() {
     fetchUser();
   }, []);
 
+  const goHome = () => {
+    console.log("going home");
+  };
+
   return (
-    <>
-      <NavigationBar />
-      <div>
-        <h1>Home</h1>
-      </div>
-    </>
+    <div>
+      <h1>Welcome</h1>
+      <p>
+        We have successfully linked to your spotify account with email {email}.
+      </p>
+      <Button onClick={() => goHome()}>Continue to App</Button>
+    </div>
   );
 }
