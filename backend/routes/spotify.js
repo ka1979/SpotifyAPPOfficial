@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 require('dotenv').config();
 var querystring = require('querystring');
-var request = require('request'); // "Request" library
+// var request = require('request'); // "Request" library
+const request = require('request-promise-native'); // "request-promise-native" library
+
 
 
 
@@ -134,105 +136,207 @@ router.get('/callback', function(req, res) {
         // use the access token to access the Spotify Web API
         // TODO: need to make this one run first
         request.get(meOptions, function(error, response, body) {
-          console.log("ME:");
-          //console.log(body);
+          console.log("ME 1:");
+          console.log(body);
           console.log("==========================================================")
           // check if user is in database
             // if no, create user
           // then, update fields
-        });
+          return request.get(likedSongsOptions)
+          .then(function(response) {
+            console.log("LIKED SONGS 2:");
+            //console.log(response)
+            const items = response.items;
+            let ret = [];
+            items.forEach(item => {
+              let artists = [];
+              item.track.artists.forEach(artist => artists.push(artist.name));
+              ret.push({ title: item.track.name, artists: artists, image: item.track.album.images[1].url });
+            });
+            // console.log("Finished Array of Liked Songs:", ret);
+            console.log("==========================================================");
+            
+            // get top songs long term
+            return request.get(topSongsLongTermOptions)
+            .then(function(response) {
+              console.log("TOP SONGS LONG TERM 3:");
+              const items = response.items;
+              let ret = [];
+              items.forEach(item => {
+                let artists = [];
+                item.artists.forEach(artist => artists.push(artist.name));
+                ret.push({ title: item.name, artists: artists, image: item.album.images[1].url });
+                // console.log(item);
+              });
+              //console.log("ret", ret);
+              //console.log(response);
+              console.log("==========================================================");
+        
+              // get top songs medium term
+              return request.get(topSongsMediumTermOptions)
+              .then(function(response) {
+                console.log("TOP SONGS MEDIUM TERM 4:");
+                const items = response.items;
+                let ret = [];
+                items.forEach(item => {
+                  let artists = [];
+                  item.artists.forEach(artist => artists.push(artist.name));
+                  ret.push({ title: item.name, artists: artists, image: item.album.images[1].url });
+                  // console.log(item);
+                });
+                //console.log("ret", ret);
+                //console.log(response);
+                console.log("==========================================================");
+          
+                // get top songs short term
+                return request.get(topSongsShortTermOptions)
+                .then(function(response) {
+                  console.log("TOP SONGS SHORT TERM 5:");
+                  const items = response.items;
+                  let ret = [];
+                  items.forEach(item => {
+                    let artists = [];
+                    item.artists.forEach(artist => artists.push(artist.name));
+                    ret.push({ title: item.name, artists: artists, image: item.album.images[1].url });
+                    // console.log(item);
+                  });
+                  //console.log("ret", ret);
+                  //console.log(response);
+                  console.log("==========================================================");
+            
+                  // get top artists long term
+                  return request.get(topArtistsLongTermOptions) // STOPPED HERE
+                  .then(function(response) {
+                    console.log("TOP ARTISTS LONG TERM 6:");
+                    let ret = [];
+                    response.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+                    // console.log(body);
+                    // console.log("finished artists: ", ret)
+                    console.log("==========================================================")
+              
+                    // get top artists medium term
+                    return request.get(topArtistsMediumTermOptions)
+                    .then(function(response) {
+                      console.log("TOP ARTISTS MEDIUM TERM 7:");
+                      let ret = [];
+                      response.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+                      // console.log(body);
+                      // console.log("finished artists: ", ret)
+                      console.log("==========================================================")
+                
+                      // get top artists short term
+                      return request.get(topArtistsShortTermOptions)
+                      .then(function(response) {
+                        console.log("TOP ARTISTS SHORT TERM 8:");
+                        let ret = [];
+                        response.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+                        // console.log(body);
+                        // console.log("finished artists: ", ret)
+                        console.log("==========================================================")
+                  
+                        // get top artists long term
+                        return request.get(topArtistsLongTermOptions);
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          });
+        })
 
-        // get liked songs
-        request.get(likedSongsOptions, function(error, response, body) {
-          console.log("LIKED SONGS:");
-          const items = body.items;
-          let ret = [];
-          items.forEach(item => {
-            let artists = []
-            item.track.artists.forEach(artist => artists.push(artist.name))
-            ret.push({title: item.track.name, artists: artists, image: item.track.album.images[1].url})
-          })
-          // console.log("Finished Array of Liked Songs:", ret);
-          console.log("==========================================================")
-        });
+        // // get liked songs
+        // request.get(likedSongsOptions, function(error, response, body) {
+        //   console.log("LIKED SONGS:");
+        //   const items = body.items;
+        //   let ret = [];
+        //   items.forEach(item => {
+        //     let artists = []
+        //     item.track.artists.forEach(artist => artists.push(artist.name))
+        //     ret.push({title: item.track.name, artists: artists, image: item.track.album.images[1].url})
+        //   })
+        //   // console.log("Finished Array of Liked Songs:", ret);
+        //   console.log("==========================================================")
+        // });
 
-        // get top songs long term
-        request.get(topSongsLongTermOptions, function(error, response, body) {
-          console.log("TOP SONGS LONG TERM:");
-          const items = body.items;
-          let ret = [];
-          items.forEach(item => {
-            let artists = []
-            item.artists.forEach(artist => artists.push(artist.name))
-            ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
-            // console.log(item);
-          })
-          console.log("ret", ret);
-          //console.log(body);
-          console.log("==========================================================")
-        });
+        // // get top songs long term
+        // request.get(topSongsLongTermOptions, function(error, response, body) {
+        //   console.log("TOP SONGS LONG TERM:");
+        //   const items = body.items;
+        //   let ret = [];
+        //   items.forEach(item => {
+        //     let artists = []
+        //     item.artists.forEach(artist => artists.push(artist.name))
+        //     ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
+        //     // console.log(item);
+        //   })
+        //   console.log("ret", ret);
+        //   //console.log(body);
+        //   console.log("==========================================================")
+        // });
 
-        // get top songs medium term
-        request.get(topSongsMediumTermOptions, function(error, response, body) {
-          console.log("TOP SONGS MEDIUM TERM:");
-          const items = body.items;
-          let ret = [];
-          items.forEach(item => {
-            let artists = []
-            item.artists.forEach(artist => artists.push(artist.name))
-            ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
-            // console.log(item);
-          })
-          console.log("ret", ret);
-          //console.log(body);
-          console.log("==========================================================")
-        });
+        // // get top songs medium term
+        // request.get(topSongsMediumTermOptions, function(error, response, body) {
+        //   console.log("TOP SONGS MEDIUM TERM:");
+        //   const items = body.items;
+        //   let ret = [];
+        //   items.forEach(item => {
+        //     let artists = []
+        //     item.artists.forEach(artist => artists.push(artist.name))
+        //     ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
+        //     // console.log(item);
+        //   })
+        //   console.log("ret", ret);
+        //   //console.log(body);
+        //   console.log("==========================================================")
+        // });
 
-        // get top songs short term
-        request.get(topSongsShortTermOptions, function(error, response, body) {
-          console.log("TOP SONGS SHORT TERM:");
-          const items = body.items;
-          let ret = [];
-          items.forEach(item => {
-            let artists = []
-            item.artists.forEach(artist => artists.push(artist.name))
-            ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
-            // console.log(item);
-          })
-          console.log("ret", ret);
-          //console.log(body);
-          console.log("==========================================================")
-        });
+        // // get top songs short term
+        // request.get(topSongsShortTermOptions, function(error, response, body) {
+        //   console.log("TOP SONGS SHORT TERM:");
+        //   const items = body.items;
+        //   let ret = [];
+        //   items.forEach(item => {
+        //     let artists = []
+        //     item.artists.forEach(artist => artists.push(artist.name))
+        //     ret.push({title: item.name, artists: artists, image: item.album.images[1].url})
+        //     // console.log(item);
+        //   })
+        //   console.log("ret", ret);
+        //   //console.log(body);
+        //   console.log("==========================================================")
+        // });
 
-        // get top artists long term
-        request.get(topArtistsLongTermOptions, function(error, response, body) {
-          console.log("TOP ARTISTS LONG TERM:");
-          let ret = [];
-          body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
-          // console.log(body);
-          // console.log("finished artists: ", ret)
-          console.log("==========================================================")
-        });
+        // // get top artists long term
+        // request.get(topArtistsLongTermOptions, function(error, response, body) {
+        //   console.log("TOP ARTISTS LONG TERM:");
+        //   let ret = [];
+        //   body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+        //   // console.log(body);
+        //   // console.log("finished artists: ", ret)
+        //   console.log("==========================================================")
+        // });
 
-        // get top artists medium term
-        request.get(topArtistsMediumTermOptions, function(error, response, body) {
-          console.log("TOP ARTISTS MEDIUM TERM:");
-          let ret = [];
-          body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
-          // console.log(body);
-          // console.log("finished artists: ", ret)
-          console.log("==========================================================")
-        });
+        // // get top artists medium term
+        // request.get(topArtistsMediumTermOptions, function(error, response, body) {
+        //   console.log("TOP ARTISTS MEDIUM TERM:");
+        //   let ret = [];
+        //   body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+        //   // console.log(body);
+        //   // console.log("finished artists: ", ret)
+        //   console.log("==========================================================")
+        // });
 
-        // get top artists short term
-        request.get(topArtistsShortTermOptions, function(error, response, body) {
-          console.log("TOP ARTISTS SHORT TERM:");
-          let ret = [];
-          body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
-          // console.log(body);
-          // console.log("finished artists: ", ret)
-          console.log("==========================================================")
-        });
+        // // get top artists short term
+        // request.get(topArtistsShortTermOptions, function(error, response, body) {
+        //   console.log("TOP ARTISTS SHORT TERM:");
+        //   let ret = [];
+        //   body.items.forEach(item => ret.push({name: item.name, image: item.images[1].url}));
+        //   // console.log(body);
+        //   // console.log("finished artists: ", ret)
+        //   console.log("==========================================================")
+        // });
+        
 
         // we can also pass the token to the browser to make requests from there
         res.redirect('http://localhost:5173/#' +
