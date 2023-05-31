@@ -10,7 +10,13 @@ var client_secret = process.env.CLIENT_SECRET;
 var redirect_uri = "http://localhost:3000/spotify/callback";
 const db = require("../firebase");
 
-const { collection, getDocs } = require("firebase/firestore");
+const { collection, getDocs, setDoc, doc } = require("firebase/firestore");
+
+let userObject = {};
+
+const populateDatabase = async (user) => {
+  await setDoc(doc(db, "Users", user.email), user);
+};
 
 /* GET users listing. */
 router.get("/", function (req, res, next) {
@@ -139,7 +145,10 @@ router.get("/callback", function (req, res) {
         // TODO: need to make this one run first
         request.get(meOptions, function (error, response, body) {
           console.log("ME 1:");
-          console.log(body);
+          userObject.name = body.display_name;
+          userObject.email = body.email;
+          userObject.isPublic = true;
+          userObject.displayingSongsAndArtists = true;
           console.log(
             "=========================================================="
           );
@@ -160,6 +169,7 @@ router.get("/callback", function (req, res) {
                 image: item.track.album.images[1].url,
               });
             });
+            userObject.likedSongs = ret;
             // console.log("Finished Array of Liked Songs:", ret);
             console.log(
               "=========================================================="
@@ -184,6 +194,7 @@ router.get("/callback", function (req, res) {
                 });
                 //console.log("ret", ret);
                 //console.log(response);
+                userObject.topSongsLong = ret;
                 console.log(
                   "=========================================================="
                 );
@@ -209,6 +220,7 @@ router.get("/callback", function (req, res) {
                     });
                     //console.log("ret", ret);
                     //console.log(response);
+                    userObject.topSongsMedium = ret;
                     console.log(
                       "=========================================================="
                     );
@@ -234,6 +246,7 @@ router.get("/callback", function (req, res) {
                         });
                         //console.log("ret", ret);
                         //console.log(response);
+                        userObject.topSongsShort = ret;
                         console.log(
                           "=========================================================="
                         );
@@ -252,6 +265,7 @@ router.get("/callback", function (req, res) {
                             );
                             // console.log(body);
                             // console.log("finished artists: ", ret)
+                            userObject.topArtistsLong = ret;
                             console.log(
                               "=========================================================="
                             );
@@ -270,6 +284,7 @@ router.get("/callback", function (req, res) {
                                 );
                                 // console.log(body);
                                 // console.log("finished artists: ", ret)
+                                userObject.topArtistsMedium = ret;
                                 console.log(
                                   "=========================================================="
                                 );
@@ -288,14 +303,15 @@ router.get("/callback", function (req, res) {
                                     );
                                     // console.log(body);
                                     // console.log("finished artists: ", ret)
+                                    userObject.topArtistsShort = ret;
                                     console.log(
                                       "=========================================================="
                                     );
-
+                                    console.log("UserObject:", userObject);
                                     // get top artists long term
-                                    return request.get(
-                                      topArtistsLongTermOptions
-                                    );
+                                    return request
+                                      .get(topArtistsLongTermOptions)
+                                      .then(populateDatabase(userObject));
                                   });
                               });
                           });
