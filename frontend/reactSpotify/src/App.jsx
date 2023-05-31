@@ -5,6 +5,7 @@ import './App.css'
 import { Routes, Route } from "react-router-dom";
 import Login from './components/login';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import Chat from './components/Chat/chat';
 function App() {
   const [count, setCount] = useState(0)
   const [loggedIn, setLoggedIN]=useState(false)
@@ -12,7 +13,7 @@ function App() {
     <>
      <Routes>
      <Route path="/" element={<Login />} />
-  
+     <Route path="/chat" element={<Chat />} />
 
      <Route path="*" element={<PageNotFound />} />
      </Routes>
