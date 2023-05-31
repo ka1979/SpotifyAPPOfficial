@@ -13,7 +13,7 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 // import Box from '@mui/material/Box';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Stack from '@mui/material/Stack';
-import { Person2Icon  } from '@mui/material';
+import Person2Icon from '@mui/icons-material/Person2';
 
 const NavigationLink = styled(RouterLink)(({ theme }) => ({
   textDecoration: "none",
@@ -28,7 +28,7 @@ const NavigationLink = styled(RouterLink)(({ theme }) => ({
 // use Stack component for vertical arrangement in the hamburger menu
 const StyledStack = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main, // set background color
-  width: 250,
+  width: 190,
   height: "100%",
   padding: theme.spacing(2),
   boxShadow: '0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7' // glow effect
@@ -138,6 +138,9 @@ const NavigationBar = () => {
               <NavigationLink to="/forums">
                 <NavigationButton>Forums</NavigationButton>
               </NavigationLink>
+              <NavigationLink to="/profile">
+                <Person2Icon sx={{ color: 'white' }}/>
+              </NavigationLink>
             </>
           )}
         </Toolbar>
@@ -147,3 +150,4 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
+
