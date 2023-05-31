@@ -10,12 +10,38 @@ var client_secret = process.env.CLIENT_SECRET;
 var redirect_uri = "http://localhost:3000/spotify/callback";
 const db = require("../firebase");
 
-const { collection, getDocs, setDoc, doc } = require("firebase/firestore");
+const {
+  collection,
+  getDocs,
+  setDoc,
+  doc,
+  getDoc,
+  updateDoc,
+} = require("firebase/firestore");
 
 let userObject = {};
 
 const populateDatabase = async (user) => {
-  await setDoc(doc(db, "Users", user.email), user);
+  const docRef = doc(db, "Users", user.email);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("user exists");
+    await updateDoc(doc(db, "Users", user.email), {
+      name: user.name,
+      email: user.email,
+      likedSongs: user.likedSongs,
+      topArtistsLong: user.topArtistsLong,
+      topArtistsMedium: user.topArtistsMedium,
+      topArtistsShort: user.topArtistsShort,
+      topSongsLong: user.topSongsLong,
+      topSongsMedium: user.topSongsMedium,
+      topSongsShort: user.topSongsShort,
+    });
+  } else {
+    console.log("user does not exist");
+    await setDoc(doc(db, "Users", user.email), user);
+  }
 };
 
 /* GET users listing. */
