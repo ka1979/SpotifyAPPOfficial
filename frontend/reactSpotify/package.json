@@ -14,9 +14,13 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",
+<<<<<<< HEAD
+    "axios": "^1.4.0",
+=======
 
     "firebase": "^9.22.1",
 
+>>>>>>> 3be74805a4e6aa0a73b0d9a9c8c83a38a84be3ad
     "gsap": "^3.11.5",
 
 
