@@ -40,7 +40,8 @@ import { Routes, Route } from "react-router-dom";
 import Login from './components/login';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 function App() {
-  const [count, setCount] = useState(0)
+
+
   const [loggedIn, setLoggedIN]=useState(false)
   return (
     <>
@@ -50,6 +51,7 @@ function App() {
 
      <Route path="*" element={<PageNotFound />} />
      </Routes>
+
     </>
   )
 }
