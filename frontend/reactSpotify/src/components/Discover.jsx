@@ -30,7 +30,7 @@ export default function Discover() {
 
   return (
     <>
-      <NavigationBar />
+      <NavigationBar page="discover" />
       <div className="view-container">
         <h1 className="white-text">Discover</h1>
         <h2 className="white-text">

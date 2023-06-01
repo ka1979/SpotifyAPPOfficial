@@ -27,19 +27,21 @@ const NavigationLink = styled(RouterLink)(({ theme }) => ({
 
 // use Stack component for vertical arrangement in the hamburger menu
 const StyledStack = styled(Stack)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.main, // set background color
+  backgroundColor: "#242424", // set background color
   width: 190,
   height: "100%",
   padding: theme.spacing(2),
-  boxShadow: "0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7", // glow effect
+  boxShadow: "0 0 10px #537FE7, 0 0 10px #537FE7, 0 0 10px #537FE7", // glow effect
 }));
 
 const NavigationButton = styled(Button)(({ theme }) => ({
   color: "white", // theme color
   fontWeight: "bold", // bold text
+  border: "1px solid transparent",
   "&:hover": {
-    color: theme.palette.secondary.main,
-    boxShadow: "0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7", // neon blue glow
+    // backgroundColor: theme.palette.secondary.main,
+    // border: "1px solid white",
+    boxShadow: "0 0 10px #537FE7, 0 0 10px #537FE7, 0 0 10px #537FE7", // neon blue glow
   },
   "&:focus": {
     outline: "none",
@@ -48,11 +50,11 @@ const NavigationButton = styled(Button)(({ theme }) => ({
   margin: "0 10px",
 }));
 
-const NavigationBar = () => {
+const NavigationBar = ({ page }) => {
   const [open, setOpen] = useState(false);
 
   const themeUsed = useTheme();
-  const isMobile = useMediaQuery(themeUsed.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(themeUsed.breakpoints.down("md"));
 
   const toggleDrawer = (isOpen) => (event) => {
     if (
@@ -112,25 +114,83 @@ const NavigationBar = () => {
                   onKeyDown={toggleDrawer(false)}
                 >
                   <NavigationLink to="/discover">
-                    <NavigationButton>Discover</NavigationButton>
+                    <NavigationButton
+                      style={
+                        page === "discover"
+                          ? { backgroundColor: "#537FE7" }
+                          : null
+                      }
+                    >
+                      Discover
+                    </NavigationButton>
                   </NavigationLink>
                   <NavigationLink to="/liked">
-                    <NavigationButton>Liked</NavigationButton>
+                    <NavigationButton
+                      style={
+                        page === "liked" ? { backgroundColor: "#537FE7" } : null
+                      }
+                    >
+                      Liked
+                    </NavigationButton>
                   </NavigationLink>
                   <NavigationLink to="/top-tracks">
-                    <NavigationButton>Top Tracks</NavigationButton>
+                    <NavigationButton
+                      style={
+                        page === "top-tracks"
+                          ? { backgroundColor: "#537FE7" }
+                          : null
+                      }
+                    >
+                      Top Tracks
+                    </NavigationButton>
                   </NavigationLink>
                   <NavigationLink to="/top-artists">
-                    <NavigationButton>Top Artists</NavigationButton>
+                    <NavigationButton
+                      style={
+                        page === "top-artists"
+                          ? { backgroundColor: "#537FE7" }
+                          : null
+                      }
+                    >
+                      Top Artists
+                    </NavigationButton>
                   </NavigationLink>
                   <NavigationLink to="/forums">
-                    <NavigationButton>Forums</NavigationButton>
+                    <NavigationButton
+                      style={
+                        page === "forums"
+                          ? { backgroundColor: "#537FE7" }
+                          : null
+                      }
+                    >
+                      Forums
+                    </NavigationButton>
                   </NavigationLink>
                   <NavigationLink to="/chat">
-                    <NavigationButton>Chat</NavigationButton>
+                    <NavigationButton
+                      style={
+                        page === "chat" ? { backgroundColor: "#537FE7" } : null
+                      }
+                    >
+                      Chat
+                    </NavigationButton>
                   </NavigationLink>
                   <NavigationLink to="/profile">
-                    <Person2Icon sx={{ color: "white" }} />
+                    {/* <Person2Icon sx={{ color: "white" }} /> */}
+                    <NavigationButton
+                      style={
+                        page === "profile"
+                          ? { backgroundColor: "#537FE7" }
+                          : null
+                      }
+                    >
+                      Profile
+                    </NavigationButton>
+                  </NavigationLink>
+                  <NavigationLink to="/">
+                    <NavigationButton style={{ backgroundColor: "#643b9f" }}>
+                      Logout
+                    </NavigationButton>
                   </NavigationLink>
                 </StyledStack>
               </SwipeableDrawer>
@@ -138,25 +198,77 @@ const NavigationBar = () => {
           ) : (
             <>
               <NavigationLink to="/discover">
-                <NavigationButton>Discover</NavigationButton>
+                <NavigationButton
+                  style={
+                    page === "discover" ? { backgroundColor: "#537FE7" } : null
+                  }
+                >
+                  Discover
+                </NavigationButton>
               </NavigationLink>
               <NavigationLink to="/liked">
-                <NavigationButton>Liked</NavigationButton>
+                <NavigationButton
+                  style={
+                    page === "liked" ? { backgroundColor: "#537FE7" } : null
+                  }
+                >
+                  Liked
+                </NavigationButton>
               </NavigationLink>
               <NavigationLink to="/top-tracks">
-                <NavigationButton>Top Tracks</NavigationButton>
+                <NavigationButton
+                  style={
+                    page === "top-tracks"
+                      ? { backgroundColor: "#537FE7" }
+                      : null
+                  }
+                >
+                  Top Tracks
+                </NavigationButton>
               </NavigationLink>
               <NavigationLink to="/top-artists">
-                <NavigationButton>Top Artists</NavigationButton>
+                <NavigationButton
+                  style={
+                    page === "top-artists"
+                      ? { backgroundColor: "#537FE7" }
+                      : null
+                  }
+                >
+                  Top Artists
+                </NavigationButton>
               </NavigationLink>
               <NavigationLink to="/forums">
-                <NavigationButton>Forums</NavigationButton>
+                <NavigationButton
+                  style={
+                    page === "forums" ? { backgroundColor: "#537FE7" } : null
+                  }
+                >
+                  Forums
+                </NavigationButton>
               </NavigationLink>
               <NavigationLink to="/chat">
-                <NavigationButton>Chat</NavigationButton>
+                <NavigationButton
+                  style={
+                    page === "chat" ? { backgroundColor: "#537FE7" } : null
+                  }
+                >
+                  Chat
+                </NavigationButton>
               </NavigationLink>
               <NavigationLink to="/profile">
-                <Person2Icon sx={{ color: "white" }} />
+                {/* <Person2Icon sx={{ color: "white" }} /> */}
+                <NavigationButton
+                  style={
+                    page === "profile" ? { backgroundColor: "#537FE7" } : null
+                  }
+                >
+                  Profile
+                </NavigationButton>
+              </NavigationLink>
+              <NavigationLink to="/">
+                <NavigationButton style={{ backgroundColor: "#643b9f" }}>
+                  Logout
+                </NavigationButton>
               </NavigationLink>
             </>
           )}
