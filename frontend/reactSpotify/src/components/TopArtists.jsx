@@ -5,10 +5,16 @@ import axios from "axios";
 import NavigationBar from "./Navbar";
 import { Button } from "@mui/material";
 import "../topItems.css";
+import { useContext } from "react";
+import { AppStateContext } from "../AppState";
 
 export default function TopTracks() {
-  const email = user;
+  const { appState, setAppState } = useContext(AppStateContext);
+  let email = appState.user;
+  if (! appState.user){
+    email= localStorage.getItem("email")
 
+  }
   const [topArtistsLong, setTopArtistsLong] = useState([]);
   const [topArtistsMedium, setTopArtistsMedium] = useState([]);
   const [topArtistsShort, setTopArtistsShort] = useState([]);
