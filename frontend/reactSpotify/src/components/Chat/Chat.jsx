@@ -4,6 +4,8 @@ import { MainContainer, ChatContainer, MessageList, Message, MessageInput , Conv
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { CardContent } from '@mui/material';
 import { useState } from 'react';
+import NavigationBar from "../Navbar";
+
 const Chat=()=>{
     const [conversation, setConversation] = useState(undefined);
 
@@ -85,7 +87,8 @@ const Chat=()=>{
       }
     }
 return(
-
+  <>
+<NavigationBar/>
     <MainContainer style={{width:"40rem", height:"40rem"}}>
 
     <Sidebar position="left" scrollable={true}>
@@ -135,6 +138,7 @@ return(
   {indexOFMESSAGEFORUSER>=0 && <MessageInput placeholder="Type message here" value={messageInputValue} onChange={val => setMessageInputValue(val)} onSend={updateMessage} />}
   </ChatContainer>
 </MainContainer>
+</>
 )
 
 

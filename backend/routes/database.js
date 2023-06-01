@@ -109,12 +109,31 @@ router.post("/liked-songs", async function (req, res, next) {
   res.json({ result: ret });
 });
 
+const fetchData = async (collectionName) => {
+  try {
+    const querySnapshot = await getDocs(collection(db, collectionName));
+    const responseData = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
+        ...data,
+      };
+    });
+    return responseData;
+  } catch (error) {
+    console.log("test");
+    console.error("Error fetching data:", error);
+    return [];
+  }
+}
 router.get("/all-users", async function (req, res, next) {
-  let ret = [];
-  getDocs(collection(db, "users")).then((allDocs) => {
-    allDocs.forEach((doc) => ret.push(doc.data()));
-  });
-  res.json({ result: ret });
+  try {
+    const responseData = await fetchData("Users");
+    console.log(responseData);
+    res.json(responseData)
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+
 });
 
 module.exports = router;
