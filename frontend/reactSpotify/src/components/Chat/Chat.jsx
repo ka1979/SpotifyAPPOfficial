@@ -1,8 +1,8 @@
 
 
-import { MainContainer, ChatContainer, MessageList, Message, MessageInput , Conversation,ConversationList, Sidebar, Search, ConversationHeader } from '@chatscope/chat-ui-kit-react';
+import { MainContainer, ChatContainer, MessageList, Message, MessageInput , Conversation,ConversationList, Sidebar, Search, ConversationHeader, AddUserButton } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
-
+import { CardContent } from '@mui/material';
 import { useState } from 'react';
 const Chat=()=>{
     const [conversation, setConversation] = useState(undefined);
@@ -89,7 +89,15 @@ return(
     <MainContainer style={{width:"40rem", height:"40rem"}}>
 
     <Sidebar position="left" scrollable={true}>
-    <Search placeholder="Search..." />
+    <CardContent
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >    <Search placeholder="Search..." /><AddUserButton />
+
+       </CardContent>
+   
     <ConversationList>                                                     
     
       {
