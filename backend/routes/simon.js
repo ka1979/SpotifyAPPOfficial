@@ -29,4 +29,16 @@ router.get("/public-users", async function (req, res, next) {
   res.json({ result: ret });
 });
 
+router.post("/user", async function (req, res, next) {
+  const email = req.body.email;
+  let ret = {};
+  const q = query(collection(db, "Users"), where("email", "==", email));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    ret = doc.data();
+  });
+  console.log("user object", ret);
+  res.json({ result: ret });
+});
+
 module.exports = router;
