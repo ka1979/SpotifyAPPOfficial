@@ -78,3 +78,4 @@ export default function LandingPage() {
     <p>Loading...</p>
   );
 }
+
