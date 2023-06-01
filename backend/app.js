@@ -9,6 +9,8 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var spotifyRouter = require("./routes/spotify");
 var databaseRouter = require("./routes/database");
+var forumRouter = require("./routes/forums"); 
+var postRouter = require("./routes/posts"); 
 
 var app = express();
 
@@ -41,6 +43,9 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/spotify", spotifyRouter);
 app.use("/database", databaseRouter);
+
+app.use("/forums", forumRouter); // added this line
+app.use("/posts", postRouter); // added this line
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
