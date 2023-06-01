@@ -9,6 +9,8 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var spotifyRouter = require("./routes/spotify");
 var databaseRouter = require("./routes/database");
+var forumRouter = require("./routes/forums"); 
+var postRouter = require("./routes/posts"); 
 
 var yashRouter = require("./routes/yash");
 var simonRouter = require("./routes/simon");
@@ -45,8 +47,13 @@ app.use("/users", usersRouter);
 app.use("/spotify", spotifyRouter);
 app.use("/database", databaseRouter);
 
+
+app.use("/forums", forumRouter); // added this line
+app.use("/posts", postRouter); // added this line
+
 app.use("/yash", yashRouter);
 app.use("/simon", simonRouter);
+
 
 
 // catch 404 and forward to error handler
