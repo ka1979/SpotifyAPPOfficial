@@ -109,4 +109,12 @@ router.post("/liked-songs", async function (req, res, next) {
   res.json({ result: ret });
 });
 
+router.get("/all-users", async function (req, res, next) {
+  let ret = [];
+  getDocs(collection(db, "users")).then((allDocs) => {
+    allDocs.forEach((doc) => ret.push(doc.data()));
+  });
+  res.json({ result: ret });
+});
+
 module.exports = router;
