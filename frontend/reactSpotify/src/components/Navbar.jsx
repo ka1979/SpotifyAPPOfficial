@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import IconButton from '@mui/material/IconButton';
+import IconButton from "@mui/material/IconButton";
 import { styled, ThemeProvider, useTheme } from "@mui/system";
-import { theme } from '../theme.js';
-import logo from '../assets/logo.png';
-import MenuIcon from '@mui/icons-material/Menu';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import { theme } from "../theme.js";
+import logo from "../assets/logo.png";
+import MenuIcon from "@mui/icons-material/Menu";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 // import Box from '@mui/material/Box';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Stack from '@mui/material/Stack';
-import Person2Icon from '@mui/icons-material/Person2';
+import useMediaQuery from "@mui/material/useMediaQuery";
+import Stack from "@mui/material/Stack";
+import Person2Icon from "@mui/icons-material/Person2";
 
 const NavigationLink = styled(RouterLink)(({ theme }) => ({
   textDecoration: "none",
@@ -31,16 +31,15 @@ const StyledStack = styled(Stack)(({ theme }) => ({
   width: 190,
   height: "100%",
   padding: theme.spacing(2),
-  boxShadow: '0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7' // glow effect
+  boxShadow: "0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7", // glow effect
 }));
 
 const NavigationButton = styled(Button)(({ theme }) => ({
- 
-  color: 'white', // theme color
-  fontWeight: 'bold', // bold text
+  color: "white", // theme color
+  fontWeight: "bold", // bold text
   "&:hover": {
     color: theme.palette.secondary.main,
-    boxShadow: '0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7', // neon blue glow
+    boxShadow: "0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7", // neon blue glow
   },
   "&:focus": {
     outline: "none",
@@ -53,10 +52,13 @@ const NavigationBar = () => {
   const [open, setOpen] = useState(false);
 
   const themeUsed = useTheme();
-  const isMobile = useMediaQuery(themeUsed.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(themeUsed.breakpoints.down("sm"));
 
   const toggleDrawer = (isOpen) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setOpen(isOpen);
@@ -64,7 +66,10 @@ const NavigationBar = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="fixed" sx={{ backgroundColor: "theme.palette.primary.main" }}>
+      <AppBar
+        position="fixed"
+        sx={{ backgroundColor: "theme.palette.primary.main" }}
+      >
         <Toolbar>
           <Typography
             variant="h6"
@@ -95,51 +100,63 @@ const NavigationBar = () => {
                 onOpen={toggleDrawer(true)}
                 PaperProps={{
                   sx: {
-                    backgroundColor: 'black', // set background color to black
-                    boxShadow: '0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7' // apply the glow effect
-                  }
+                    backgroundColor: "black", // set background color to black
+                    boxShadow:
+                      "0 0 10px #537FE7, 0 0 20px #537FE7, 0 0 30px #537FE7", // apply the glow effect
+                  },
                 }}
               >
-                 <StyledStack
+                <StyledStack
                   role="presentation"
                   onClick={toggleDrawer(false)}
                   onKeyDown={toggleDrawer(false)}
                 >
-                  <NavigationLink to="/discover-users">
-                    <NavigationButton>Discover Users</NavigationButton>
-                  </NavigationLink>
                   <NavigationLink to="/discover">
                     <NavigationButton>Discover</NavigationButton>
+                  </NavigationLink>
+                  <NavigationLink to="/liked">
+                    <NavigationButton>Liked</NavigationButton>
                   </NavigationLink>
                   <NavigationLink to="/top-tracks">
                     <NavigationButton>Top Tracks</NavigationButton>
                   </NavigationLink>
+                  <NavigationLink to="/top-artists">
+                    <NavigationButton>Top Artists</NavigationButton>
+                  </NavigationLink>
                   <NavigationLink to="/forums">
                     <NavigationButton>Forums</NavigationButton>
                   </NavigationLink>
-                  <NavigationLink to="/profile">
-                    <Person2Icon sx={{ color: 'white' }}/>
+                  <NavigationLink to="/chat">
+                    <NavigationButton>Chat</NavigationButton>
                   </NavigationLink>
-
+                  <NavigationLink to="/profile">
+                    <Person2Icon sx={{ color: "white" }} />
+                  </NavigationLink>
                 </StyledStack>
               </SwipeableDrawer>
             </>
           ) : (
             <>
-              <NavigationLink to="/discover-users">
-                <NavigationButton>Discover Users</NavigationButton>
-              </NavigationLink>
               <NavigationLink to="/discover">
                 <NavigationButton>Discover</NavigationButton>
+              </NavigationLink>
+              <NavigationLink to="/liked">
+                <NavigationButton>Liked</NavigationButton>
               </NavigationLink>
               <NavigationLink to="/top-tracks">
                 <NavigationButton>Top Tracks</NavigationButton>
               </NavigationLink>
+              <NavigationLink to="/top-artists">
+                <NavigationButton>Top Artists</NavigationButton>
+              </NavigationLink>
               <NavigationLink to="/forums">
                 <NavigationButton>Forums</NavigationButton>
               </NavigationLink>
+              <NavigationLink to="/chat">
+                <NavigationButton>Chat</NavigationButton>
+              </NavigationLink>
               <NavigationLink to="/profile">
-                <Person2Icon sx={{ color: 'white' }}/>
+                <Person2Icon sx={{ color: "white" }} />
               </NavigationLink>
             </>
           )}
@@ -150,4 +167,3 @@ const NavigationBar = () => {
 };
 
 export default NavigationBar;
-
