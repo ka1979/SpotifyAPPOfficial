@@ -10,12 +10,17 @@ import { AppStateContext } from "../AppState";
 export default function LikedSongs() {
   const  { appState, setAppState }=useContext(AppStateContext)
   const [likedSongs, setLikedSongs] = useState([]);
-  const email = localStorage.getItem("email") || appState.user;
-  useEffect(() => {
-    // Store the email in localStorage whenever it changes
-    localStorage.setItem("email", email);
-  }, [email]);
+  let email = appState.user;
+  if (! appState.user){
+    email= localStorage.getItem("email")
+
+  }
+
+  console.log("EMAIL")
+ console.log(email)
   const getLikedSongs = async () => {
+   
+ 
     try {
       const response = await axios.post(
         `http://localhost:3000/database/liked-songs`,

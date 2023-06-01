@@ -34,6 +34,7 @@ export default function LandingPage() {
       ...prevState,
       user:email,
     }));
+    localStorage.setItem("email", email)
   }, [email]);
   console.log(appState.user)
 
