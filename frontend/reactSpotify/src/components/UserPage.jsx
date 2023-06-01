@@ -5,14 +5,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useContext } from "react";
-import { AppStateContext } from "../AppState";
-export default function UserPage() {
-  const { appState, setAppState } = useContext(AppStateContext);
-  let email = appState.user;
-  if (! appState.user){
-    email= localStorage.getItem("email")
 
-  }
+export default function UserPage() {
+  const { email } = useParams();
   const [name, setName] = useState("");
   const [topSongs, setTopSongs] = useState([]);
   const [topArtists, setTopArtists] = useState([]);
