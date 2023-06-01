@@ -10,12 +10,38 @@ var client_secret = process.env.CLIENT_SECRET;
 var redirect_uri = "http://localhost:3000/spotify/callback";
 const db = require("../firebase");
 
-const { collection, getDocs, setDoc, doc } = require("firebase/firestore");
+const {
+  collection,
+  getDocs,
+  setDoc,
+  doc,
+  getDoc,
+  updateDoc,
+} = require("firebase/firestore");
 
 let userObject = {};
 
 const populateDatabase = async (user) => {
-  await setDoc(doc(db, "Users", user.email), user);
+  const docRef = doc(db, "Users", user.email);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    console.log("user exists");
+    await updateDoc(doc(db, "Users", user.email), {
+      name: user.name,
+      email: user.email,
+      likedSongs: user.likedSongs,
+      topArtistsLong: user.topArtistsLong,
+      topArtistsMedium: user.topArtistsMedium,
+      topArtistsShort: user.topArtistsShort,
+      topSongsLong: user.topSongsLong,
+      topSongsMedium: user.topSongsMedium,
+      topSongsShort: user.topSongsShort,
+    });
+  } else {
+    console.log("user does not exist");
+    await setDoc(doc(db, "Users", user.email), user);
+  }
 };
 
 /* GET users listing. */
@@ -307,7 +333,7 @@ router.get("/callback", function (req, res) {
                                     console.log(
                                       "=========================================================="
                                     );
-                                    console.log("UserObject:", userObject);
+                                    //console.log("UserObject:", userObject);
                                     // get top artists long term
                                     return request
                                       .get(topArtistsLongTermOptions)
@@ -415,7 +441,7 @@ router.get("/callback", function (req, res) {
 
         // we can also pass the token to the browser to make requests from there
         res.redirect(
-          "http://localhost:5173/#" +
+          "http://localhost:5173/landing/#" +
             querystring.stringify({
               access_token: access_token,
               refresh_token: refresh_token,
@@ -431,6 +457,48 @@ router.get("/callback", function (req, res) {
       }
     });
   }
+});
+
+// /spotify/refresh_token
+router.get("/refresh_token", function (req, res) {
+  var refresh_token = req.body.refresh_token;
+  var authOptions = {
+    url: "https://accounts.spotify.com/api/token",
+    headers: {
+      Authorization:
+        "Basic " +
+        new Buffer.from(client_id + ":" + client_secret).toString("base64"),
+    },
+    form: {
+      grant_type: "refresh_token",
+      refresh_token: refresh_token,
+    },
+    json: true,
+  };
+
+  request.post(authOptions, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      var access_token = body.access_token;
+      res.send({
+        access_token: access_token,
+      });
+    }
+  });
+});
+
+router.get("/user", function (req, res) {
+  const access_token = req.query.access_token;
+  // console.log(req.query);
+  // console.log(access_token);
+  const meOptions = {
+    url: "https://api.spotify.com/v1/me",
+    headers: { Authorization: "Bearer " + access_token },
+    json: true,
+  };
+  request.get(meOptions, function (error, response, body) {
+    const email = body.email;
+    res.send({ email });
+  });
 });
 
 module.exports = router;
