@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useContext } from "react";
-
+import { Helmet } from "react-helmet";
 export default function UserPage() {
   const { email } = useParams();
   const [name, setName] = useState("");
@@ -37,7 +37,13 @@ export default function UserPage() {
 
   return (
     <>
-      <NavigationBar page="discover" />
+
+    <Helmet>
+    <title> {name}</title>
+    </Helmet>
+    <NavigationBar page="discover" />
+
+
       <div className="view-container">
         <h1 className="white-text">{name}</h1>
         <div className="time-buttons">

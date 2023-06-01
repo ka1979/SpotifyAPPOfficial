@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AppStateContext } from "../AppState";
 import "../landing.css";
+import { Helmet } from "react-helmet";
 
 export let user = null;
 
@@ -57,6 +58,10 @@ export default function LandingPage() {
   };
 
   return email ? (
+    <>
+    <Helmet>
+    <title>Spotify Social</title>
+  </Helmet>
     <div className="blue-container">
       <h1 className="white-text">Welcome</h1>
       <div className="shadow-container">
@@ -74,7 +79,13 @@ export default function LandingPage() {
         Continue to App
       </Button>
     </div>
+    </>
   ) : (
+    <>
+    <Helmet>
+    <title>Forums</title>
+  </Helmet>
     <p>Loading...</p>
+    </>
   );
 }
