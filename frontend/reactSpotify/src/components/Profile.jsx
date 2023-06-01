@@ -86,7 +86,7 @@ export default function Profile() {
             onChange={handleSwitch}
           />
           <div className="shadow-container" style={{ marginTop: '10px', padding: '5px' }}>
-            <h7 className='white-text' style={{ marginTop: '10px' }}>When your profile is public, other users can see your name, top songs, and top artists on the discover page</h7>
+            <h7 className='white-text' style={{ marginTop: '10px' }}>When your profile is public, other users can see your name, top songs, top artists, and liked songs on the discover page</h7>
           </div>
         </div>
       </div>
