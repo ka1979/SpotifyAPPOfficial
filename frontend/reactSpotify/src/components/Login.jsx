@@ -26,7 +26,7 @@ const Login = () => {
 
   return (<>
     <Helmet>
-    <title>Liked Songs</title>
+    <title>Login</title>
   </Helmet>
     <div className="blue-container">
       <h1 className="welcome-text">Welcome to Spotify Social!</h1>
