@@ -11,9 +11,8 @@ import { Helmet } from "react-helmet";
 export default function TopTracks() {
   const { appState, setAppState } = useContext(AppStateContext);
   let email = appState.user;
-  if (! appState.user){
-    email= localStorage.getItem("email")
-
+  if (!appState.user) {
+    email = localStorage.getItem("email");
   }
   const [topArtistsLong, setTopArtistsLong] = useState([]);
   const [topArtistsMedium, setTopArtistsMedium] = useState([]);
@@ -71,7 +70,7 @@ export default function TopTracks() {
     <title>Top Artists</title>
   </Helmet>
     <div style={{ alignItems: "center" }}>
-      <NavigationBar />
+      <NavigationBar page="top-artists" />
       <div className="view-container">
         <h1 className="white-text">
           {showingTopArtistsLong
