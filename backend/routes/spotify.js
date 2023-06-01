@@ -176,7 +176,7 @@ router.get("/callback", function (req, res) {
             userObject.image = body.images[0].url;
           } else {
             userObject.image =
-              "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg";
+              "https://i.scdn.co/image/ab6761610000e5eb3a21495eac7c635940a04c14";
           }
           userObject.name = body.display_name;
           userObject.email = body.email;
