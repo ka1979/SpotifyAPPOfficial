@@ -1,43 +1,67 @@
-// post.js
 var express = require('express');
 var router = express.Router();
 const db = require("../firebase");
-const { collection, addDoc, serverTimestamp } = require("firebase/firestore");
+const { doc, getDoc, updateDoc, arrayUnion, runTransaction } = require("firebase/firestore");
 
-// Endpoint to create a new post
+//endpoint to create new post
 router.post('/', async (req, res) => {
-  const { forumId, content, authorId } = req.body;
+  const { forumId, title, creator } = req.body;
   const newPost = {
-    forumId,
-    content,
-    authorId,
-    createdAt: serverTimestamp(),
-    likes: 0,
+    id: Math.random().toString(36).substring(7),
+    title,
+    creator,
+    createdAt: Date.now(),
+    likes: 0
   };
+  
+  await updateDoc(doc(db, 'forums', forumId), {
+    posts: arrayUnion(newPost)
+  });
 
-  const postRef = await addDoc(collection(db, 'posts'), newPost);
-  res.json({ id: postRef.id, ...newPost });
+  res.json(newPost);
 });
 
 // Endpoint to get all posts for a specific forum
-router.get('/forum/:forumId', async (req, res) => {
-    const postQuery = query(collection(db, 'posts'), where('forumId', '==', req.params.forumId));
-    const postQuerySnapshot = await getDocs(postQuery);
-    const posts = postQuerySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    res.json(posts);
-  });
-  
-  // Endpoint to update a post's likes
-  router.put('/:id/like', async (req, res) => {
-    const postRef = doc(db, 'posts', req.params.id);
-    const postSnap = await getDoc(postRef);
-    if (!postSnap.exists()) {
-      res.status(404).send("Post not found");
-      return;
+router.get('/:id', async (req, res) => {
+  const forumDoc = await getDoc(doc(db, 'forums', req.params.id));
+  const posts = forumDoc.data().posts || [];
+  res.json(posts);
+});
+
+// Endpoint to update a post's likes
+router.post('/:id/like', async (req, res) => {
+  const { forumId, postId } = req.body;
+  const forumRef = doc(db, 'forums', forumId);
+
+  await runTransaction(db, async (transaction) => {
+    const forumDoc = await transaction.get(forumRef);
+    const posts = forumDoc.data().posts;
+    const post = posts.find(post => post.id === postId);
+    if (!post) {
+      throw "Post not found";
     }
-    const newLikes = postSnap.data().likes + 1;
-    await updateDoc(postRef, { likes: newLikes });
-    res.json({ id: postRef.id, likes: newLikes });
+    post.likes++;
+    transaction.update(forumRef, { posts });
+    res.json({ postId, likes: post.likes });
   });
-  
-  module.exports = router;
+});
+
+// router.post('/:id/like', async (req, res) => {
+//   const { forumId, postId } = req.body;
+//   const forumRef = doc(db, 'forums', forumId);
+
+//   await runTransaction(db, async (transaction) => {
+//     const forumDoc = await transaction.get(forumRef);
+//     const posts = forumDoc.data().posts;
+//     const post = posts.find(post => post.id === postId);
+//     if (!post) {
+//       throw "Post not found";
+//     }
+//     post.likes++;
+//     transaction.update(forumRef, { posts });
+//   });
+
+//   res.json({ postId, likes: post.likes });
+// });
+
+module.exports = router;

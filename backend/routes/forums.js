@@ -11,6 +11,7 @@ router.post('/post', async (req, res) => {
     title,
     creator,
     createdAt: serverTimestamp(),
+    posts: [],
   };
 
   const forumRef = await addDoc(collection(db, 'forums'), newForum);

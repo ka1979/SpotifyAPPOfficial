@@ -14,6 +14,12 @@ import TopArtists from "./components/TopArtists";
 import Forums from "./components/Forums";
 import Profile from "./components/Profile";
 import LikedSongs from "./components/LikedSongs";
+import Posts from "./components/Posts"; 
+
+
+
+
+
 
 function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // this state should be managed with authentication state
@@ -31,6 +37,7 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/homeSY" element={<HomeSY />} />
       <Route path="*" element={<PageNotFound />} />
+      <Route path="/posts/:id" element={<Posts />} />
     </Routes>
   );
 }

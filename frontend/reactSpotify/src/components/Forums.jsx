@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Grid, Card, CardContent, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { Container, Grid, Card, CardContent, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import axios from 'axios';
 import NavigationBar from "./Navbar";
-import {user} from "./LandingPage"
+import {user} from "./LandingPage";
+import { Link } from "react-router-dom";
+
+
 
 
 
@@ -47,10 +50,9 @@ const Forums = () => {
     try {
       const creatorRes = await axios.post('http://localhost:3000/forums/creator', {email: email});
       const creator = creatorRes.data.result;
-      console.log('Creator:',creator);
-      console.log('Creating a new forum:', newForumTitle);
       const response = await axios.post('http://localhost:3000/forums/post', { title: newForumTitle, creator: creator });
-      console.log('Forum created:', response.data);
+      console.log(response.data);
+      
       fetchForums();
       setNewForumTitle("");
       setOpen(false);
@@ -64,12 +66,12 @@ const Forums = () => {
     forum.title.toLowerCase().includes(search.toLowerCase())
   );
 
-  function daysSince(date) {
-    const now = new Date();
-    const differenceInTime = now.getTime() - date.getTime();
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-    return Math.floor(differenceInDays);
-  }
+  // function daysSince(date) {
+  //   const now = new Date();
+  //   const differenceInTime = now.getTime() - date.getTime();
+  //   const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+  //   return Math.floor(differenceInDays);
+  // }
   
 
   
@@ -121,24 +123,22 @@ const Forums = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Grid container spacing={3}>
+      {/* <Grid container spacing={3}> */}
         {filteredForums.map((forum) => (
-          <Grid item key={forum.id} xs={12} sm={6} md={4}>
-            <Card>
+          // <Grid item key={forum.id} xs={12} sm={6} md={4}>
+          <Box mb={2} borderBottom={1} borderColor="divider" key={forum.id}>
+            <Link to={`/posts/${forum.id}`} style={{ textDecoration: 'none', color: 'white' }}>
+            <Card >
               <CardContent>
                 <Typography variant="h5">{forum.title}</Typography>
                 <Typography variant="body2">Created by: {forum.creator}</Typography>
-               
-                {/* <Typography variant="body2">
-                  Started {daysSince(forum.createdAt ? forum.createdAt.toDate() : new Date())} days ago
-                  at {forum.createdAt ? forum.createdAt.toDate().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Invalid time'}
-                </Typography> */}
-  
               </CardContent>
             </Card>
-          </Grid>
+            </Link>
+            </Box>
+          // </Grid>
         ))}
-      </Grid>
+      {/* </Grid> */}
     </Container>
     </div>
     </>
