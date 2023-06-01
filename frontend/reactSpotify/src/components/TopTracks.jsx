@@ -67,6 +67,10 @@ export default function TopTracks() {
   }, []);
 
   return (
+    <>
+    <Helmet>
+    <title>Top Artists</title>
+  </Helmet>
     <div style={{ alignItems: "center" }}>
       <NavigationBar />
       <div className="view-container">
@@ -159,5 +163,6 @@ export default function TopTracks() {
         )}
       </div>
     </div>
+    </>
   );
 }

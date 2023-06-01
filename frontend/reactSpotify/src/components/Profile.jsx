@@ -6,6 +6,7 @@ import Switch from 'react-switch';
 import { BsFillLockFill, BsFillUnlockFill } from "react-icons/bs";
 import { useContext } from "react";
 import { AppStateContext } from "../AppState";
+import { Helmet } from "react-helmet";
 export default function Profile() {
   const { appState, setAppState } = useContext(AppStateContext);
   let email = appState.user;
@@ -54,6 +55,10 @@ export default function Profile() {
     getProfile();
   }, []);
   return (
+<>
+    <Helmet>
+    <title>Profile</title>
+  </Helmet>
     <div className='view-container'>
       <NavigationBar />
       <h1 className='white-text'>My Profile</h1>
@@ -91,5 +96,6 @@ export default function Profile() {
         </div>
       </div>
     </div>
+    </>
   );
 }

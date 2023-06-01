@@ -1,6 +1,6 @@
 import LoginIcon from "@mui/icons-material/Login";
 import { styled, Button } from "@mui/material";
-
+import { Helmet } from "react-helmet";
 const Login = () => {
   const LoginButton = styled(Button)(({ theme }) => ({
     color: "black",
@@ -24,7 +24,10 @@ const Login = () => {
     window.location.href = "http://localhost:3000/spotify/login";
   };
 
-  return (
+  return (<>
+    <Helmet>
+    <title>Liked Songs</title>
+  </Helmet>
     <div className="blue-container">
       <h1 className="welcome-text">Welcome to Spotify Social!</h1>
       <div className="shadow-container">
@@ -45,6 +48,7 @@ const Login = () => {
         Login with Spotify
       </LoginButton>
     </div>
+    </>
   );
 };
 

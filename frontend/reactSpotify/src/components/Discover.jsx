@@ -3,6 +3,7 @@ import NavigationBar from "./Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Helmet from "react-helmet"
 
 export default function Discover() {
   const [publicUsers, setPublicUsers] = useState([]);
@@ -30,6 +31,9 @@ export default function Discover() {
 
   return (
     <>
+    <Helmet>
+      <title>Discover</title>
+    </Helmet>
       <NavigationBar />
       <div className="view-container">
         <h1 className="white-text">Discover</h1>

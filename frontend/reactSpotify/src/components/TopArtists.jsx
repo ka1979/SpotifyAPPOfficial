@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import "../topItems.css";
 import { useContext } from "react";
 import { AppStateContext } from "../AppState";
-
+import { Helmet } from "react-helmet";
 export default function TopTracks() {
   const { appState, setAppState } = useContext(AppStateContext);
   let email = appState.user;
@@ -66,6 +66,10 @@ export default function TopTracks() {
   }, []);
 
   return (
+    <>
+    <Helmet>
+    <title>Top Artists</title>
+  </Helmet>
     <div style={{ alignItems: "center" }}>
       <NavigationBar />
       <div className="view-container">
@@ -149,5 +153,6 @@ export default function TopTracks() {
         )}
       </div>
     </div>
+    </>
   );
 }
