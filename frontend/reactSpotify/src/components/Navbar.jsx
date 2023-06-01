@@ -114,6 +114,9 @@ const NavigationBar = () => {
                   <NavigationLink to="/discover">
                     <NavigationButton>Discover</NavigationButton>
                   </NavigationLink>
+                  <NavigationLink to="/liked">
+                    <NavigationButton>Liked</NavigationButton>
+                  </NavigationLink>
                   <NavigationLink to="/top-tracks">
                     <NavigationButton>Top Tracks</NavigationButton>
                   </NavigationLink>
@@ -136,6 +139,9 @@ const NavigationBar = () => {
             <>
               <NavigationLink to="/discover">
                 <NavigationButton>Discover</NavigationButton>
+              </NavigationLink>
+              <NavigationLink to="/liked">
+                <NavigationButton>Liked</NavigationButton>
               </NavigationLink>
               <NavigationLink to="/top-tracks">
                 <NavigationButton>Top Tracks</NavigationButton>
