@@ -5,7 +5,7 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 import { useState } from 'react';
 const Chat=()=>{
-    const [conversation, setConversation] = useState([]);
+    const [conversation, setConversation] = useState(undefined);
 
     const [messages, setMessages]=useState([
       {
@@ -104,7 +104,7 @@ return(
     </ConversationList>
   </Sidebar>
   <ChatContainer>
-  {conversation!==[] &&<ConversationHeader>
+  {conversation!==undefined &&<ConversationHeader>
             <ConversationHeader.Content>
               <span style={{
       color: "#36342f",

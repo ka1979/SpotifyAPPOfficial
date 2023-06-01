@@ -9,7 +9,6 @@ import Chat from './components/Chat/chat';
 
 
 
-import PageNotFound from "./components/PageNotFound/PageNotFound";
 import HomeSY from "./components/HomeSY";
 import Navbar from "./components/Navbar";
 import LandingPage from "./components/LandingPage";
