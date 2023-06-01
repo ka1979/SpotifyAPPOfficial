@@ -8,16 +8,16 @@ import { useContext } from "react";
 import { AppStateContext } from "../AppState";
 
 export default function LikedSongs() {
-  const  { appState, setAppState }=useContext(AppStateContext)
   const [likedSongs, setLikedSongs] = useState([]);
+  const  { appState, setAppState }=useContext(AppStateContext)
+
   let email = appState.user;
   if (! appState.user){
     email= localStorage.getItem("email")
 
   }
 
-  console.log("EMAIL")
- console.log(email)
+
   const getLikedSongs = async () => {
    
  
