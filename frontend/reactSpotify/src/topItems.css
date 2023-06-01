@@ -22,10 +22,10 @@
 
 .top-card img {
   width: 100%;
-  height: auto;
   border-radius: 8px;
   object-fit: cover;
   margin-bottom: 16px;
+  aspect-ratio: 1/1;
 }
 
 .top-title {
@@ -55,4 +55,8 @@
   flex-wrap: wrap;
   width: fit-content;
   justify-content: center;
+}
+
+.time-button {
+  margin: 10px;
 }

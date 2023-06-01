@@ -72,6 +72,8 @@ export default function TopTracks() {
         </h1>
         <div className="time-buttons">
           <Button
+            style={{ margin: "10px" }}
+            variant="contained"
             onClick={() => {
               setShowingTopTracksLong(true);
               setShowingTopTracksMedium(false);
@@ -81,6 +83,8 @@ export default function TopTracks() {
             All-time
           </Button>
           <Button
+            style={{ margin: "10px" }}
+            variant="contained"
             onClick={() => {
               setShowingTopTracksLong(false);
               setShowingTopTracksMedium(true);
@@ -90,6 +94,8 @@ export default function TopTracks() {
             Last 6 Months
           </Button>
           <Button
+            style={{ margin: "10px" }}
+            variant="contained"
             onClick={() => {
               setShowingTopTracksLong(false);
               setShowingTopTracksMedium(false);
