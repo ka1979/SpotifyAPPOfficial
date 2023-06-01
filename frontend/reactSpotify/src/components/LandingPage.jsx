@@ -3,12 +3,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AppStateContext } from "../AppState";
 import "../landing.css";
+import { Helmet } from "react-helmet";
 
 export let user = null;
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const { appState, setAppState } = useContext(AppStateContext);
 
   const hash = window.location.hash.substr(1);
 
@@ -27,7 +31,16 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (email) user = email;
+    setAppState((prevState) => ({
+      ...prevState,
+      user:email,
+    }));
+    localStorage.setItem("email", email)
   }, [email]);
+  console.log(appState.user)
+
+
+
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -45,6 +58,10 @@ export default function LandingPage() {
   };
 
   return email ? (
+    <>
+    <Helmet>
+    <title>Spotify Social</title>
+  </Helmet>
     <div className="blue-container">
       <h1 className="white-text">Welcome</h1>
       <div className="shadow-container">
@@ -62,7 +79,13 @@ export default function LandingPage() {
         Continue to App
       </Button>
     </div>
+    </>
   ) : (
+    <>
+    <Helmet>
+    <title>Forums</title>
+  </Helmet>
     <p>Loading...</p>
+    </>
   );
 }

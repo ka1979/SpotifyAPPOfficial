@@ -3,6 +3,8 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.13.3",
-    "react-router-dom": "^6.11.2"
+    "react-icons": "^4.9.0",
+    "react-router-dom": "^6.11.2",
+    "react-switch": "^7.0.0"
   }
 }

@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Card, CardContent, Typography, TextField, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -5,6 +6,9 @@ import axios from 'axios';
 import NavigationBar from "./Navbar";
 import {user} from "./LandingPage";
 import { Link } from "react-router-dom";
+
+import Helmet from "react-helmet"
+
 
 
 
@@ -77,6 +81,7 @@ const Forums = () => {
   
   return (
     <>
+
     <NavigationBar />
     <div className="view-container">
     <Container>
@@ -140,6 +145,12 @@ const Forums = () => {
         ))}
       {/* </Grid> */}
     </Container>
+
+    <Helmet>
+      <title>Forums</title>
+    </Helmet>
+    
+
     </div>
     </>
   );
