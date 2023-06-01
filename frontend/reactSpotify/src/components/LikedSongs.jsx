@@ -8,6 +8,7 @@ import "../topItems.css";
 import { useContext } from "react";
 import { AppStateContext } from "../AppState";
 
+import { Helmet } from "react-helmet";
 export default function LikedSongs() {
   const { appState, setAppState } = useContext(AppStateContext);
   let email = appState.user;
@@ -34,6 +35,10 @@ export default function LikedSongs() {
   }, []);
 
   return (
+    <>
+    <Helmet>
+    <title>Liked Songs</title>
+  </Helmet>
     <div style={{ alignItems: "center" }}>
       <NavigationBar page="liked" />
       <div className="view-container">
@@ -53,5 +58,6 @@ export default function LikedSongs() {
         </div>
       </div>
     </div>
+    </>
   );
 }
