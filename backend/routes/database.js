@@ -96,4 +96,17 @@ router.post("/top-artists-short", async function (req, res, next) {
   res.json({ result: ret });
 });
 
+router.post("/liked-songs", async function (req, res, next) {
+  const email = req.body.email;
+  let ret;
+  // console.log(req.query)  // shows the URL params (stuff after the ? in the URL)
+  const q = query(collection(db, "Users"), where("email", "==", email));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    ret = doc.data().likedSongs;
+  });
+  console.log(ret);
+  res.json({ result: ret });
+});
+
 module.exports = router;
