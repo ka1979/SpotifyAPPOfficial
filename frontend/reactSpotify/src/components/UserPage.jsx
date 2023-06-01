@@ -37,7 +37,7 @@ export default function UserPage() {
 
   return (
     <>
-      <NavigationBar />
+      <NavigationBar page="discover" />
       <div className="view-container">
         <h1 className="white-text">{name}</h1>
         <div className="time-buttons">

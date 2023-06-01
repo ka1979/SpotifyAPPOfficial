@@ -8,14 +8,11 @@ import "../topItems.css";
 import { useContext } from "react";
 import { AppStateContext } from "../AppState";
 
-
 export default function LikedSongs() {
-
   const { appState, setAppState } = useContext(AppStateContext);
   let email = appState.user;
-  if (! appState.user){
-    email= localStorage.getItem("email")
-
+  if (!appState.user) {
+    email = localStorage.getItem("email");
   }
 
   const [likedSongs, setLikedSongs] = useState([]);
@@ -38,7 +35,7 @@ export default function LikedSongs() {
 
   return (
     <div style={{ alignItems: "center" }}>
-      <NavigationBar />
+      <NavigationBar page="liked" />
       <div className="view-container">
         <h1 className="white-text">Recently Liked Songs</h1>
         <div className="cards-container">
