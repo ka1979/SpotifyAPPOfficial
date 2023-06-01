@@ -2,8 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+export let user = null;
 
 export default function LandingPage() {
+  const navigate = useNavigate();
+
   const hash = window.location.hash.substr(1);
 
   // Parse the hash string into an object
@@ -20,6 +25,10 @@ export default function LandingPage() {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
+    if (email) user = email;
+  }, [email]);
+
+  useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get(
         `http://localhost:3000/spotify/user?access_token=${accessToken}`
@@ -31,7 +40,7 @@ export default function LandingPage() {
   }, []);
 
   const goHome = () => {
-    console.log("going home");
+    navigate("../homeSY");
   };
 
   return (
