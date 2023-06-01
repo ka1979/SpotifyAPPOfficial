@@ -1,15 +1,16 @@
 import React from "react";
-import { user } from "./LandingPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NavigationBar from "./Navbar";
 import { Button } from "@mui/material";
 import "../topItems.css";
+import { useContext } from "react";
+import { AppStateContext } from "../AppState";
 
 export default function LikedSongs() {
-  const email = user;
-
+  const  { appState, setAppState }=useContext(AppStateContext)
   const [likedSongs, setLikedSongs] = useState([]);
+  let email = appState.user;
 
   const getLikedSongs = async () => {
     try {

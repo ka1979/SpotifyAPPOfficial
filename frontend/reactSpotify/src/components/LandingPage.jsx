@@ -3,12 +3,15 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AppStateContext } from "../AppState";
 import "../landing.css";
 
 export let user = null;
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const { appState, setAppState } = useContext(AppStateContext);
 
   const hash = window.location.hash.substr(1);
 
@@ -27,7 +30,15 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (email) user = email;
+    setAppState((prevState) => ({
+      ...prevState,
+      user:email,
+    }));
   }, [email]);
+  console.log(appState.user)
+
+
+
 
   useEffect(() => {
     const fetchUser = async () => {
