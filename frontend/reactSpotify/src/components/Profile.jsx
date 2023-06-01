@@ -4,9 +4,15 @@ import { user } from './LandingPage';
 import axios from 'axios'
 import Switch from 'react-switch';
 import { BsFillLockFill, BsFillUnlockFill } from "react-icons/bs";
-
+import { useContext } from "react";
+import { AppStateContext } from "../AppState";
 export default function Profile() {
-  const email = user;
+  const { appState, setAppState } = useContext(AppStateContext);
+  let email = appState.user;
+  if (! appState.user){
+    email= localStorage.getItem("email")
+
+  }
   const [name, setName] = useState('');
   const [isPublic, setIsPublic] = useState('false');
   const handleSwitch = async (e) => {
