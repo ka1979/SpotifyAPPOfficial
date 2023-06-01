@@ -65,6 +65,27 @@ const Chat=()=>{
       setMessages(newArray);
       setMessageInputValue("")
     }
+
+
+    const getInfoAndLastSender=(element)=>{
+
+
+       
+
+      const index=messages.findIndex((object)=>{
+        console.log("awal")
+        console.log(element.sender)
+        console.log("akhir")
+        console.log(object.user.name)
+        return element.sender===object.user.name
+        
+      })
+      console.log(index)
+      return {
+        lastSenderName:messages[index].user.userName,
+        info:element.message
+      }
+    }
 return(
 
     <MainContainer style={{width:"40rem", height:"40rem"}}>
@@ -77,7 +98,13 @@ return(
       
       <Conversation name="Joe" lastSenderName="Joe" info="Yes i can do it for you"  onClick={() => setConversation('Joe')} active={conversation==='Joe'}>
       </Conversation>
-      
+      {
+        messages.map((element)=>{
+return(
+  <Conversation name={element.user.userName} { ...getInfoAndLastSender(element.messages[element.messages.length-1])}  onClick={() => setConversation(element.user.userName) } active={conversation==='Joe'}/>
+)
+        })
+      }
      
                                                                   
     </ConversationList>
