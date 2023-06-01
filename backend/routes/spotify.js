@@ -37,6 +37,7 @@ const populateDatabase = async (user) => {
       topSongsLong: user.topSongsLong,
       topSongsMedium: user.topSongsMedium,
       topSongsShort: user.topSongsShort,
+      image: user.image,
     });
   } else {
     console.log("user does not exist");
@@ -171,6 +172,12 @@ router.get("/callback", function (req, res) {
         // TODO: need to make this one run first
         request.get(meOptions, function (error, response, body) {
           console.log("ME 1:");
+          if (body.images.length > 0) {
+            userObject.image = body.images[0].url;
+          } else {
+            userObject.image =
+              "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg";
+          }
           userObject.name = body.display_name;
           userObject.email = body.email;
           userObject.isPublic = true;

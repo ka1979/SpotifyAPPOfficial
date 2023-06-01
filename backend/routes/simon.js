@@ -37,7 +37,7 @@ router.post("/user", async function (req, res, next) {
   querySnapshot.forEach((doc) => {
     ret = doc.data();
   });
-  console.log("user object", ret);
+  //   console.log("user object", ret);
   res.json({ result: ret });
 });
 
