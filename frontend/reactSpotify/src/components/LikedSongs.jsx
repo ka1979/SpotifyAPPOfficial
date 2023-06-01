@@ -21,14 +21,22 @@ export default function LikedSongs() {
         `http://localhost:3000/database/liked-songs`,
         { email: email }
       );
-     
+
+      console.log(response.data.result)
       setLikedSongs(response.data.result);
     } catch (error) {
       console.error(error); // Handle any errors that occur
     }
   };
 
+  useEffect(() => {
 
+  
+    
+      getLikedSongs();
+  
+   
+  }, []);
 
   return (
     <div style={{ alignItems: "center" }}>
