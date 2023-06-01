@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import "../topItems.css";
 import { useContext } from "react";
 import { AppStateContext } from "../AppState";
-
+import { Helmet } from "react-helmet";
 export default function TopTracks() {
   const { appState, setAppState } = useContext(AppStateContext);
   let email = appState.user;
