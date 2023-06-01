@@ -44,7 +44,9 @@ export default function Discover() {
               onClick={() => goToUserProfile(user.email)}
             >
               <img src={user.image}></img>
-              <p className="top-title">{user.name}</p>
+              <div className="shadow-container">
+                <p className="top-title">{user.name}</p>
+              </div>
             </div>
           ))}
         </div>
