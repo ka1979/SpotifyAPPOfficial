@@ -1,6 +1,6 @@
 
 
-import { MainContainer, ChatContainer, MessageList, Message, MessageInput , Conversation,ConversationList, Sidebar, Search } from '@chatscope/chat-ui-kit-react';
+import { MainContainer, ChatContainer, MessageList, Message, MessageInput , Conversation,ConversationList, Sidebar, Search, ConversationHeader } from '@chatscope/chat-ui-kit-react';
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 
 import { useState } from 'react';
@@ -73,16 +73,14 @@ const Chat=()=>{
        
 
       const index=messages.findIndex((object)=>{
-        console.log("awal")
         console.log(element.sender)
-        console.log("akhir")
         console.log(object.user.name)
         return element.sender===object.user.name
         
       })
-      console.log(index)
+     
       return {
-        lastSenderName:messages[index].user.userName,
+        lastSenderName: index===-1?"YOU":messages[index].user.userName,
         info:element.message
       }
     }
@@ -93,15 +91,11 @@ return(
     <Sidebar position="left" scrollable={true}>
     <Search placeholder="Search..." />
     <ConversationList>                                                     
-      <Conversation name="Lilly" lastSenderName="Lilly" info="Yes i can do it for you" onClick={() => setConversation('Lilly')} active={conversation==='Lilly'}>
-      </Conversation>
-      
-      <Conversation name="Joe" lastSenderName="Joe" info="Yes i can do it for you"  onClick={() => setConversation('Joe')} active={conversation==='Joe'}>
-      </Conversation>
+    
       {
         messages.map((element)=>{
 return(
-  <Conversation name={element.user.userName} { ...getInfoAndLastSender(element.messages[element.messages.length-1])}  onClick={() => setConversation(element.user.userName) } active={conversation==='Joe'}/>
+  <Conversation name={element.user.userName} { ...getInfoAndLastSender(element.messages[element.messages.length-1])}  onClick={() => setConversation(element.user.userName) } active={conversation===element.user.userName}/>
 )
         })
       }
@@ -110,6 +104,14 @@ return(
     </ConversationList>
   </Sidebar>
   <ChatContainer>
+  {conversation!==[] &&<ConversationHeader>
+            <ConversationHeader.Content>
+              <span style={{
+      color: "#36342f",
+      alignSelf: "flex-center"
+    }}>{conversation}</span>
+            </ConversationHeader.Content>
+        </ConversationHeader>}
   <MessageList>
     {indexOFMESSAGEFORUSER>=0 && messages[indexOFMESSAGEFORUSER].messages.map((element)=>{
          return(  <Message  model={{
