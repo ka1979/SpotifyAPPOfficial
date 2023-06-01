@@ -14,6 +14,7 @@ import TopArtists from "./components/TopArtists";
 import Forums from "./components/Forums";
 import Profile from "./components/Profile";
 import LikedSongs from "./components/LikedSongs";
+import UserPage from "./components/UserPage";
 
 function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // this state should be managed with authentication state
@@ -25,6 +26,7 @@ function App() {
       <Route path="/landing" element={<LandingPage />} />
       <Route path="/liked" element={<LikedSongs />} />
       <Route path="/discover" element={<Discover />} />
+      <Route path="/user/:email" element={<UserPage />} />
       <Route path="/top-tracks" element={<TopTracks />} />
       <Route path="/top-artists" element={<TopArtists />} />
       <Route path="/forums" element={<Forums />} />
