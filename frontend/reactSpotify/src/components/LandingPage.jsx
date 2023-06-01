@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "../landing.css";
 
 export let user = null;
 
@@ -40,16 +41,28 @@ export default function LandingPage() {
   }, []);
 
   const goHome = () => {
-    navigate("../homeSY");
+    navigate("../profile");
   };
 
-  return (
-    <div>
-      <h1>Welcome</h1>
-      <p>
-        We have successfully linked to your spotify account with email {email}.
-      </p>
-      <Button onClick={() => goHome()}>Continue to App</Button>
+  return email ? (
+    <div className="blue-container">
+      <h1 className="white-text">Welcome</h1>
+      <div className="shadow-container">
+        <p>
+          We have successfully linked to your Spotify account with the following
+          email:
+        </p>
+        <p className="email">{email}</p>
+      </div>
+      <Button
+        style={{ margin: "20px", backgroundColor: "white", color: "black" }}
+        variant="contained"
+        onClick={() => goHome()}
+      >
+        Continue to App
+      </Button>
     </div>
+  ) : (
+    <p>Loading...</p>
   );
 }
