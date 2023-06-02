@@ -77,12 +77,16 @@ export default function TopTracks() {
             {showingTopTracksLong
               ? "All Time Top Tracks"
               : showingTopTracksMedium
-                ? "Last 6 Months' Top Tracks"
-                : "Last Month's Top Tracks"}
+              ? "Last 6 Months' Top Tracks"
+              : "Last Month's Top Tracks"}
           </h1>
           <div className="time-buttons">
             <Button
-              style={{ margin: "10px" }}
+              style={
+                showingTopTracksLong
+                  ? { margin: "10px", backgroundColor: "white", color: "black" }
+                  : { margin: "10px" }
+              }
               variant="contained"
               onClick={() => {
                 setShowingTopTracksLong(true);
@@ -93,7 +97,11 @@ export default function TopTracks() {
               All-time
             </Button>
             <Button
-              style={{ margin: "10px" }}
+              style={
+                showingTopTracksMedium
+                  ? { margin: "10px", backgroundColor: "white", color: "black" }
+                  : { margin: "10px" }
+              }
               variant="contained"
               onClick={() => {
                 setShowingTopTracksLong(false);
@@ -104,7 +112,11 @@ export default function TopTracks() {
               Last 6 Months
             </Button>
             <Button
-              style={{ margin: "10px" }}
+              style={
+                showingTopTracksShort
+                  ? { margin: "10px", backgroundColor: "white", color: "black" }
+                  : { margin: "10px" }
+              }
               variant="contained"
               onClick={() => {
                 setShowingTopTracksLong(false);

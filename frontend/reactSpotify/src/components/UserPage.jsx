@@ -37,18 +37,20 @@ export default function UserPage() {
 
   return (
     <>
-
       <Helmet>
         <title> {name}</title>
       </Helmet>
       <NavigationBar page="discover" />
 
-
       <div className="view-container">
         <h1 className="white-text">{name}</h1>
         <div className="time-buttons">
           <Button
-            style={{ margin: "10px" }}
+            style={
+              showingLikedSongs
+                ? { margin: "10px", backgroundColor: "white", color: "black" }
+                : { margin: "10px" }
+            }
             variant="contained"
             onClick={() => {
               setShowingLikedSongs(true);
@@ -59,7 +61,11 @@ export default function UserPage() {
             Liked Songs
           </Button>
           <Button
-            style={{ margin: "10px" }}
+            style={
+              showingTopSongs
+                ? { margin: "10px", backgroundColor: "white", color: "black" }
+                : { margin: "10px" }
+            }
             variant="contained"
             onClick={() => {
               setShowingLikedSongs(false);
@@ -70,7 +76,11 @@ export default function UserPage() {
             Top Songs
           </Button>
           <Button
-            style={{ margin: "10px" }}
+            style={
+              showingTopArtists
+                ? { margin: "10px", backgroundColor: "white", color: "black" }
+                : { margin: "10px" }
+            }
             variant="contained"
             onClick={() => {
               setShowingLikedSongs(false);
