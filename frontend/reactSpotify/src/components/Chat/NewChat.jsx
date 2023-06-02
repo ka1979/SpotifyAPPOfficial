@@ -107,7 +107,7 @@ const NewChat=(props)=>{
              required
              menuPortalTarget={document.body}
            />}
-           <button type="submit" disabled={otherUsers ===undefined} style={{marginTop:"5vh"}} >Talk to this user</button>
+           <button type="submit" disabled={otherUsers ===undefined} style={{marginTop:"5vh", color:"white"}} >Talk to this user</button>
            </form>
 
 </CardContent>

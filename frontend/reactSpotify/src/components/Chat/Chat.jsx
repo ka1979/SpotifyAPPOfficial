@@ -80,7 +80,7 @@ const Chat = () => {
       messages: newMessagePage,
     };
 
-    if (newMessagePage.length===0){
+    if (newMessagePage.length===1){
 
       try {
         // Make an HTTP request to the Express.js backend using Axios
