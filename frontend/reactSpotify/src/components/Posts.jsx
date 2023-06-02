@@ -111,13 +111,13 @@ const Posts = () => {
           <DialogTitle id="form-dialog-title">Create a new post</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To create a new post, please enter the post title here.
+              To create a new post, please enter the post content here.
             </DialogContentText>
             <TextField
               autoFocus
               margin="dense"
               id="name"
-              label="Post Title"
+              label="Post Content"
               type="text"
               fullWidth
               value={newPostTitle}
