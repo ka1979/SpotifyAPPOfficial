@@ -5,14 +5,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useContext } from "react";
-import { AppStateContext } from "../AppState";
+import { Helmet } from "react-helmet";
 export default function UserPage() {
-  const { appState, setAppState } = useContext(AppStateContext);
-  let email = appState.user;
-  if (! appState.user){
-    email= localStorage.getItem("email")
-
-  }
+  const { email } = useParams();
   const [name, setName] = useState("");
   const [topSongs, setTopSongs] = useState([]);
   const [topArtists, setTopArtists] = useState([]);
@@ -42,7 +37,13 @@ export default function UserPage() {
 
   return (
     <>
-      <NavigationBar />
+
+    <Helmet>
+    <title> {name}</title>
+    </Helmet>
+    <NavigationBar page="discover" />
+
+
       <div className="view-container">
         <h1 className="white-text">{name}</h1>
         <div className="time-buttons">
