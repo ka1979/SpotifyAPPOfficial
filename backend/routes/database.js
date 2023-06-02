@@ -7,6 +7,8 @@ const {
   collection,
   query,
   where,
+  doc,
+  updateDoc,
 } = require("firebase/firestore");
 
 router.get("/", function (req, res, next) {
@@ -50,19 +52,19 @@ router.get("/getMessages", async function (req, res, next) {
 });
 
 const addExistingMessage = async (req, res) => {
-  const newItem = req.body.messageUpdated
+  const newItem = req.body.messageUpdated;
 
   try {
     const MessageRef = doc(db, "Messages", req.body.id);
-    await updateDoc(MessageRef, {...newItem});
+    await updateDoc(MessageRef, { ...newItem });
     res.status(200).json({ success: true });
   } catch (error) {
-    console.error('Error adding item:', error);
-    res.status(500).json({ error: 'Failed to add item' });
+    console.error("Error adding item:", error);
+    res.status(500).json({ error: "Failed to add item" });
   }
 };
 router.post("/addMessageExisting", addExistingMessage);
-  
+
 router.post("/top-tracks-long", async function (req, res, next) {
   const email = req.body.email;
   let ret;
