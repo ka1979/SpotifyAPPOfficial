@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from './components/login';
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Chat from './components/Chat/chat';
-
+import NewChat from "./components/Chat/NewChat";
 
 
 import HomeSY from "./components/HomeSY";
@@ -41,6 +41,7 @@ function App() {
       <Route path="/forums" element={<Forums />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/homeSY" element={<HomeSY />} />
+      <Route path="/newChat" element={<NewChat />} />
       <Route path="*" element={<PageNotFound />} />
       <Route path="/posts/:id" element={<Posts />} />
     </Routes>
