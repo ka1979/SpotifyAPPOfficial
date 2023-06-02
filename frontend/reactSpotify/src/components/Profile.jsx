@@ -40,6 +40,7 @@ export default function Profile() {
         email: email,
       });
       setName(response.data.result.name);
+      localStorage.setItem("userName",response.data.result.name)
       setIsPublic(response.data.result.isPublic);
       setImage(response.data.result.image);
       console.log(response.data.result.name);

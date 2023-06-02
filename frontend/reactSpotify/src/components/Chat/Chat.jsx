@@ -7,69 +7,92 @@ import { useState } from 'react';
 import NavigationBar from "../Navbar";
 import NewChat from './NewChat';
 import { useContext } from 'react';
+import { useEffect } from 'react';
 import { AppStateContext } from "../../AppState";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from 'axios';
+
 const Chat=()=>{
   const isMobile = useMediaQuery('(max-width: 768px)');
-
   const { appState, setAppState } = useContext(AppStateContext);
   let email = appState.user;
   if (!appState.user) {
     email = localStorage.getItem("email");
   }
+  let myUSERNAME=localStorage.getItem("userName")
+
+  const getUser = (users) => {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].email !== email) {
+        return users[i];
+      }
+    }
+    return null; // Return null if no user with matching email is found
+  };
+  
+
   const [isNewperson, setIsNewPerson]=useState(false)
     const [conversation, setConversation] = useState(undefined);
     const [messages, setMessages]=useState([
-      {
-        user:{name:"jim@gmail.com", userName:"Joe"},
-        messages:[
-          {
-            message:"what up",
-            sender:"jim@gmail.com",
-            position:"single"
+      // {
+      //   user:[{email:"jim@gmail.com", userName:"Joe"},{email:"akproductions2002@gmail.com", userName:"yang"}],
+      //   messages:[
+      //     {
+      //       message:"what up",
+      //       sender:"jim@gmail.com",
+      //       position:"single"
 
-          },
-          {
-            message:"not much tbh",
-            sender:"murrah@email.com",
-            position:"single"
+      //     },
+      //     {
+      //       message:"not much tbh",
+      //       sender:"akproductions2002@gmail.com",
+      //       position:"single"
 
-          }
-        ]
-      },
-      {
-        user:{name:"jimdffadsfasdfasdfaf@gmail.com", userName:"Lilly"},
-        messages:[
-          {
-            message:"how are you",
-            sender:"murrah@email.com",
-            position:"single"
+      //     }
+      //   ]
+      // },
+      // {
+      //   user:[{email:"jimdffadsfasdfasdfaf@gmail.com", userName:"Lilly"},{email:"akproductions2002@gmail.com", userName:"yang"}],
+      //   messages:[
+      //     {
+      //       message:"how are you",
+      //       sender:"akproductions2002@gmail.com",
+      //       position:"single"
 
-          },
-          {
-            message:".....",
-            sender:"jimdffadsfasdfasdfaf@gmail.com",
-            position:"single"
+      //     },
+      //     {
+      //       message:".....",
+      //       sender:"jimdffadsfasdfasdfaf@gmail.com",
+      //       position:"single"
 
-          }
-        ]
-      }
+      //     }
+      //   ]
+      // }
     ])
-  
+    useEffect(()=>{
+      const getUsers=async()=>{
+        try {
+        const res = await axios.get(`http://localhost:3000/database/getMessages?username=${myUSERNAME}&email=${email}`);
+        setMessages(res.data.responseData.conversations)
+        }catch(error){
+            console.log(error)
+        }
+    }
+    getUsers()
+    },[])
+    
    
     const [messageInputValue, setMessageInputValue] = useState("");
     let indexOFMESSAGEFORUSER=messages.findIndex((element)=>{
-      return element.user.userName===conversation
+      return getUser(element.users).userName===conversation
     })
-         const userName="murrah@email.com"
 
     const updateMessage=()=>{
       const getMsg=messageInputValue
       const newMessagePage=[...messages[indexOFMESSAGEFORUSER].messages]
       newMessagePage.push({
         message:getMsg,
-        sender:userName,
+        sender:email,
         position:"single"
       })
       const updatedValue={ ...messages[indexOFMESSAGEFORUSER], messages: newMessagePage };
@@ -86,14 +109,13 @@ const Chat=()=>{
        
 
       const index=messages.findIndex((object)=>{
-        console.log(element.sender)
-        console.log(object.user.name)
-        return element.sender===object.user.name
+      
+        return element.sender===getUser(object.users).email
         
       })
      
       return {
-        lastSenderName: index===-1?"YOU":messages[index].user.userName,
+        lastSenderName: index===-1?"YOU":getUser(messages[index].users).userName,
         info:element.message
       }
     }
@@ -175,7 +197,7 @@ return(
       {
         messages.map((element)=>{
 return(
-  <Conversation key={element.user.userName}  name={element.user.userName} { ...CheckIfanyMessages(element.messages)}  onClick={() => setConversation(element.user.userName) } active={conversation===element.user.userName}/>
+  <Conversation key={getUser(element.users).userName}  name={getUser(element.users).userName} { ...CheckIfanyMessages(element.messages)}  onClick={() => setConversation(getUser(element.users).userName) } active={conversation===getUser(element.users).userName}/>
 )
         })
       }
@@ -198,7 +220,7 @@ return(
             message: element.message,
             sentTime: "15 mins ago",
             sender: element.sender,
-            direction: userName!==element.sender?"incoming":"outgoing",
+            direction: email!==element.sender?"incoming":"outgoing",
             position: "single"
           }}></Message>)
     })}
