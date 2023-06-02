@@ -21,6 +21,8 @@ import { user } from "./LandingPage";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AppStateContext } from "../AppState";
+import MessageIcon from "@mui/icons-material/Message";
+import PersonIcon from "@mui/icons-material/Person";
 
 import Helmet from "react-helmet";
 
@@ -102,10 +104,11 @@ const Forums = () => {
       <div className="view-container">
         <Container>
           <TextField
-            variant="outlined"
+            style={{ backgroundColor: "white", borderRadius: "10px 10px 0 0" }}
+            variant="filled"
             margin="normal"
             fullWidth
-            label="Search forums"
+            label="Search Forums"
             value={search}
             onChange={handleSearchChange}
           />
@@ -156,12 +159,71 @@ const Forums = () => {
                 to={`/posts/${forum.id}`}
                 style={{ textDecoration: "none", color: "white" }}
               >
-                <Card>
-                  <CardContent>
-                    <Typography variant="h5">{forum.title}</Typography>
-                    <Typography variant="body2">
-                      Created by: {forum.creator}
+                <Card
+                  style={{
+                    borderRadius: "10px",
+                    backgroundColor: "#537fe7",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    paddingRight: "10px",
+                  }}
+                >
+                  <CardContent
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      textAlign: "left",
+                    }}
+                  >
+                    <Typography
+                      style={{
+                        color: "white",
+                        fontWeight: "bold",
+                        marginBottom: "5px",
+                      }}
+                      variant="h5"
+                    >
+                      {forum.title}
                     </Typography>
+                    <div
+                      className="shadow-container"
+                      style={{
+                        padding: "5px",
+                        width: "fit-content",
+                        margin: "0",
+                        textAlign: "center",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: "10px",
+                      }}
+                    >
+                      <PersonIcon
+                        style={{ fontSize: "large", marginRight: "5px" }}
+                      />
+                      <Typography variant="body2">{forum.creator}</Typography>
+                    </div>
+                  </CardContent>
+                  <CardContent>
+                    <div
+                      className="shadow-container"
+                      style={{
+                        padding: "10px 5px 10px 5px",
+                        margin: "0",
+                        textAlign: "center",
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <MessageIcon style={{ marginRight: "10px" }} />
+                      <Typography variant="h6">{forum.posts.length}</Typography>
+                    </div>
                   </CardContent>
                 </Card>
               </Link>
