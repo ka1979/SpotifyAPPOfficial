@@ -21,8 +21,15 @@ import { useEffect } from "react";
 import { AppStateContext } from "../../AppState";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
-import {v4 as uniqueId} from "uuid"
-
+function generateRandomString() {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let randomString = '';
+  for (let i = 0; i < 32; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+  return randomString;
+}
 const Chat = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const { appState, setAppState } = useContext(AppStateContext);
@@ -159,7 +166,9 @@ const Chat = () => {
       messages: [],
     });
   
-    const id=uniqueId()
+
+ 
+    const id=generateRandomString()
 
     const newDocId=[...DocIds]
     newDocId.unshift(id)
