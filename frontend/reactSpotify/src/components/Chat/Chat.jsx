@@ -86,6 +86,17 @@ const Chat=()=>{
         info:element.message
       }
     }
+
+
+    const CheckIfanyMessages=(messages)=>{
+      if (messages.length===0){
+        return{
+
+        }
+      }else{
+       return  getInfoAndLastSender(messages[messages.length-1])
+      }
+    }
 return(
   <>
 <NavigationBar/>
@@ -115,7 +126,7 @@ return(
       {
         messages.map((element)=>{
 return(
-  <Conversation key={element.user.userName} name={element.user.userName} { ...getInfoAndLastSender(element.messages[element.messages.length-1])}  onClick={() => setConversation(element.user.userName) } active={conversation===element.user.userName}/>
+  <Conversation key={element.user.userName} name={element.user.userName} { ...CheckIfanyMessages(element.messages)}  onClick={() => setConversation(element.user.userName) } active={conversation===element.user.userName}/>
 )
         })
       }
