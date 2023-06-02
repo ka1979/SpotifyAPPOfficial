@@ -8,8 +8,10 @@ import NavigationBar from "../Navbar";
 import NewChat from './NewChat';
 import { useContext } from 'react';
 import { AppStateContext } from "../../AppState";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from 'axios';
 const Chat=()=>{
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const { appState, setAppState } = useContext(AppStateContext);
   let email = appState.user;
@@ -135,8 +137,8 @@ setMessages(newMessages)
 
 return(
   <>
-<NavigationBar/>
-    <MainContainer style={{ display:isNewperson?"block":"", borderRadius:"5px", marginTop:"100px", height:"80vh", width:"90vw", marginLeft:"2vw"}}>
+<NavigationBar page="chat"/>
+    <MainContainer style={{ display:isNewperson?"block":"", borderRadius:"5px", marginTop:"100px", height:"80vh", width:"90vw", marginLeft:"-3vw"}}>
 
 
 
@@ -146,14 +148,25 @@ return(
 
 {!isNewperson? <>
 <Sidebar position="left" scrollable={true}>
+{isMobile &&  <AddUserButton onClick={()=>{
+            setIsNewPerson(true)
+          }} />
+
+          }
     <CardContent
             sx={{
               display: "flex",
               flexDirection: "row",
             }}
-          >    <Search placeholder="Search..." /><AddUserButton onClick={()=>{
+          >    <Search placeholder="Search..." />
+          
+          {!isMobile &&  <AddUserButton onClick={()=>{
             setIsNewPerson(true)
           }} />
+
+          }
+          
+        
 
        </CardContent>
    
