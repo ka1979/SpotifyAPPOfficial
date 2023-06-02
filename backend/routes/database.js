@@ -18,36 +18,40 @@ router.get("/", function (req, res, next) {
   res.send("database api");
 });
 const getUserConversations = async (userName, email) => {
-  try {    
-
-    const q = query(collection(db, 'Messages'), where('users', 'array-contains', { email, userName }));
+  try {
+    const q = query(
+      collection(db, "Messages"),
+      where("users", "array-contains", { email, userName })
+    );
     const querySnapshot = await getDocs(q);
     const conversations = [];
-    const DocIds=[]
+    const DocIds = [];
     querySnapshot.forEach((doc) => {
       const conversation = doc.data();
       conversations.push(conversation);
-      DocIds.push(doc.id)
+      DocIds.push(doc.id);
     });
-    
-    return {conversations,DocIds};
+
+    return { conversations, DocIds };
   } catch (error) {
-    console.log('Error getting user conversations:', error);
+    console.log("Error getting user conversations:", error);
     return [];
   }
 };
-router.get("/getMessages",async function (req, res, next) {
-console.log(req.query.username)
-console.log(req.query.email)
+router.get("/getMessages", async function (req, res, next) {
+  console.log(req.query.username);
+  console.log(req.query.email);
 
   try {
-    const responseData = await getUserConversations(req.query.username,req.query.email);
+    const responseData = await getUserConversations(
+      req.query.username,
+      req.query.email
+    );
     console.log(responseData);
     res.json({ responseData });
   } catch (error) {
     console.error("Error fetching data:", error);
   }
-  
 });
 
 router.post("/top-tracks-long", async function (req, res, next) {
@@ -156,19 +160,24 @@ const fetchData = async (collectionName) => {
     console.error("Error fetching data:", error);
     return [];
   }
-}
+};
 router.get("/all-users", async function (req, res, next) {
   try {
     const responseData = await fetchData("Users");
     console.log(responseData);
-    res.json(responseData)
+    res.json(responseData);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
-
 });
 
-
-
+router.post("/new-chat", async function (req, res, next) {
+  try {
+    const object = req.body;
+    setDoc(doc(db, "Messages", req.body.id), object);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+});
 
 module.exports = router;
