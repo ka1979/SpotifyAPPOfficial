@@ -5,11 +5,10 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { CardContent } from '@mui/material';
 import { useState } from 'react';
 import NavigationBar from "../Navbar";
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import NewChat from './NewChat';
 const Chat=()=>{
+  const [isNewperson, setIsNewPerson]=useState(false)
     const [conversation, setConversation] = useState(undefined);
-    const Navigate=useNavigate()
     const [messages, setMessages]=useState([
       {
         user:{name:"jim@gmail.com", userName:"Joe"},
@@ -90,16 +89,23 @@ const Chat=()=>{
 return(
   <>
 <NavigationBar/>
-    <MainContainer style={{ borderRadius:"5px", marginTop:"100px", height:"80vh", width:"90vw", marginLeft:"2vw"}}>
+    <MainContainer style={{ display:isNewperson?"block":"", borderRadius:"5px", marginTop:"100px", height:"80vh", width:"90vw", marginLeft:"2vw"}}>
 
-    <Sidebar position="left" scrollable={true}>
+
+
+
+
+
+
+{!isNewperson? <>
+<Sidebar position="left" scrollable={true}>
     <CardContent
             sx={{
               display: "flex",
               flexDirection: "row",
             }}
           >    <Search placeholder="Search..." /><AddUserButton onClick={()=>{
-            Navigate("/newChat")
+            setIsNewPerson(true)
           }} />
 
        </CardContent>
@@ -139,7 +145,16 @@ return(
   </MessageList>
   
   {indexOFMESSAGEFORUSER>=0 && <MessageInput placeholder="Type message here" value={messageInputValue} onChange={val => setMessageInputValue(val)} onSend={updateMessage} />}
-  </ChatContainer>
+  </ChatContainer></>:<NewChat goBack={()=>{
+     setIsNewPerson(false)
+  }}/>
+
+}
+
+
+
+
+
 </MainContainer>
 </>
 )

@@ -7,8 +7,7 @@ import { useContext } from 'react';
 import { useEffect } from 'react';
 import Select from "react-select";
 import { CardContent } from '@mui/material';
-import NavigationBar from "../Navbar";
-import { useNavigate } from 'react-router-dom';
+
 const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -27,12 +26,10 @@ const customStyles = {
       }),
   };
   
-const NewChat=()=>{
+const NewChat=(props)=>{
     const { appState, setAppState } = useContext(AppStateContext);
     const[otherUsers, setOtherUsers]=useState(undefined)
     const [selectedUser, setSelectedUser] = useState(null);
-    const Navigate=useNavigate()
-
 
     useEffect(()=>{
         const getUsers=async()=>{
@@ -66,8 +63,7 @@ const NewChat=()=>{
    
     return(
 <>
-<NavigationBar/>
-<MainContainer style={{ borderRadius:"5px",display:"block", marginTop:"100px", height:"80vh", width:"90vw", marginLeft:"2vw"}}>
+
 
 
 
@@ -79,7 +75,7 @@ const NewChat=()=>{
             }}
           >   
 <Button onClick={()=>{
-    Navigate("/chat")
+    props.goBack()
 }}><i className="fa-solid fa-arrow-left fa-beat fa-2xl" style={{ marginTop:"2vh", marginRight:"90vw", color: "#4eacf4"}}></i></Button>
     <h1>Select a new user for chat</h1>
 
@@ -104,7 +100,7 @@ const NewChat=()=>{
 
 </CardContent>
 
-</MainContainer>
+
 </>
     )
 }
