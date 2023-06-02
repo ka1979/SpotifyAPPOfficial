@@ -102,6 +102,7 @@ const Forums = () => {
     <>
       <NavigationBar page="forums" />
       <div className="view-container">
+        <h1 className="white-text">Forums</h1>
         <Container>
           <TextField
             style={{ backgroundColor: "white", borderRadius: "10px 10px 0 0" }}
@@ -116,7 +117,7 @@ const Forums = () => {
             variant="contained"
             color="primary"
             startIcon={<AddCircleOutlineIcon sx={{ color: "white" }} />}
-            style={{ margin: "10px 0" }}
+            style={{ margin: "10px 10px 20px 10px" }}
             onClick={handleOpen}
           >
             Create New Forum

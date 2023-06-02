@@ -53,75 +53,75 @@ export default function Profile() {
     getProfile();
   }, []);
   return (
-<>
-    <Helmet>
-    <title>Profile</title>
-  </Helmet>
-    <div className='view-container'>
-    <NavigationBar page="profile" />
-      <h1 className='white-text'>My Profile</h1>
-      <div className='top-card'>
-        <img src={image} style={{ marginBottom: '0px' }} />
+    <>
+      <Helmet>
+        <title>Profile</title>
+      </Helmet>
+      <div className="view-container">
+        <NavigationBar page="profile" />
+        <h1 className="white-text">My Profile</h1>
+        <div className="top-card">
+          <img src={image} style={{ marginBottom: "0px" }} />
+        </div>
+
+        <div className="cards-container">
+          <div className="top-card">
+            <h2 className="white-text">Display Name:</h2>
+            <div
+              className="shadow-container"
+              style={{
+                marginTop: "10px",
+                padding: "5px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <h3>{name}</h3>
+            </div>
+          </div>
+
+          <div className="top-card">
+            <h2 className="white-text">Email:</h2>
+            <div
+              className="shadow-container"
+              style={{
+                marginTop: "10px",
+                padding: "5px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <h3>{email}</h3>
+            </div>
+          </div>
+
+          <div className="top-card">
+            {isPublic ? (
+              <h2 className="white-text">
+                <BsFillUnlockFill /> Public Profile
+              </h2>
+            ) : (
+              <h2 className="white-text">
+                <BsFillLockFill /> Private Profile
+              </h2>
+            )}
+            <Switch checked={isPublic} onChange={handleSwitch} />
+            <div
+              className="shadow-container"
+              style={{ marginTop: "10px", padding: "5px" }}
+            >
+              <h7 className="white-text" style={{ marginTop: "10px" }}>
+                When your profile is public, other users can see your name, top
+                songs, top artists, and liked songs on the discover page
+              </h7>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div className="cards-container">
-        <div className="top-card">
-          <h2>Display Name:</h2>
-          <div
-            className="shadow-container"
-            style={{
-              marginTop: "10px",
-              padding: "5px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <h3>{name}</h3>
-          </div>
-        </div>
-
-        <div className="top-card">
-          <h2>Email:</h2>
-          <div
-            className="shadow-container"
-            style={{
-              marginTop: "10px",
-              padding: "5px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <h3>{email}</h3>
-          </div>
-        </div>
-
-        <div className="top-card">
-          {isPublic ? (
-            <h2>
-              <BsFillUnlockFill /> Public Profile
-            </h2>
-          ) : (
-            <h2>
-              <BsFillLockFill /> Private Profile
-            </h2>
-          )}
-          <Switch checked={isPublic} onChange={handleSwitch} />
-          <div
-            className="shadow-container"
-            style={{ marginTop: "10px", padding: "5px" }}
-          >
-            <h7 className="white-text" style={{ marginTop: "10px" }}>
-              When your profile is public, other users can see your name, top
-              songs, top artists, and liked songs on the discover page
-            </h7>
-          </div>
-        </div>
-      </div>
-    </div>
     </>
   );
 }
