@@ -103,15 +103,6 @@ const Forums = () => {
       <div className="view-container">
         <h1 className="white-text">Forums</h1>
         <Container>
-          <TextField
-            style={{ backgroundColor: "white", borderRadius: "10px 10px 0 0" }}
-            variant="filled"
-            margin="normal"
-            fullWidth
-            label="Search Forums"
-            value={search}
-            onChange={handleSearchChange}
-          />
           <Button
             variant="contained"
             color="primary"
@@ -121,6 +112,19 @@ const Forums = () => {
           >
             Create New Forum
           </Button>
+          <TextField
+            style={{
+              backgroundColor: "white",
+              borderRadius: "10px 10px 0 0",
+              marginBottom: "15px",
+            }}
+            variant="filled"
+            margin="normal"
+            fullWidth
+            label="Search Forums"
+            value={search}
+            onChange={handleSearchChange}
+          />
           <Dialog
             open={open}
             onClose={handleClose}
