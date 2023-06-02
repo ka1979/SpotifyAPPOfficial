@@ -7,7 +7,6 @@ import { useContext } from 'react';
 import { useEffect } from 'react';
 import Select from "react-select";
 import { CardContent } from '@mui/material';
-
 const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -27,6 +26,7 @@ const customStyles = {
   };
   
 const NewChat=(props)=>{
+
     const { appState, setAppState } = useContext(AppStateContext);
     const[otherUsers, setOtherUsers]=useState(undefined)
     const [selectedUser, setSelectedUser] = useState(null);
@@ -60,6 +60,18 @@ const NewChat=(props)=>{
         GlobalEmail= localStorage.getItem("email")
   
     }
+
+    const getNewUser=(event)=>{
+        event.preventDefault()
+    const { value, label } = selectedUser
+
+    localStorage.setItem("newUSERNAME", label)
+    localStorage.setItem("newUSEREmail", value)
+
+
+    props.onSubmit()
+
+    }
    
     return(
 <>
@@ -79,7 +91,7 @@ const NewChat=(props)=>{
 }}><i className="fa-solid fa-arrow-left fa-beat fa-2xl" style={{ marginTop:"2vh", marginRight:"90vw", color: "#4eacf4"}}></i></Button>
     <h1>Select a new user for chat</h1>
 
-   
+   <form onSubmit={getNewUser}>
     
     {otherUsers !==undefined && <Select
 
@@ -95,8 +107,8 @@ const NewChat=(props)=>{
              required
              menuPortalTarget={document.body}
            />}
-           <button disabled={otherUsers ===undefined} style={{marginTop:"5vh"}} >Talk to this user</button>
-
+           <button type="submit" disabled={otherUsers ===undefined} style={{marginTop:"5vh"}} >Talk to this user</button>
+           </form>
 
 </CardContent>
 

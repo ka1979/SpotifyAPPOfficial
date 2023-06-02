@@ -6,7 +6,16 @@ import { CardContent } from '@mui/material';
 import { useState } from 'react';
 import NavigationBar from "../Navbar";
 import NewChat from './NewChat';
+import { useContext } from 'react';
+import { AppStateContext } from "../../AppState";
+
 const Chat=()=>{
+
+  const { appState, setAppState } = useContext(AppStateContext);
+  let email = appState.user;
+  if (!appState.user) {
+    email = localStorage.getItem("email");
+  }
   const [isNewperson, setIsNewPerson]=useState(false)
     const [conversation, setConversation] = useState(undefined);
     const [messages, setMessages]=useState([
@@ -97,6 +106,33 @@ const Chat=()=>{
        return  getInfoAndLastSender(messages[messages.length-1])
       }
     }
+
+
+const newUserSelected=()=>{
+const newMessages=[...messages]
+
+console.log()
+newMessages.unshift(
+  {user:{name:localStorage.getItem("newUSEREmail"),userName:localStorage.getItem("newUSERNAME")}
+  ,messages:[]}
+  
+  
+  )
+setMessages(newMessages)
+  setIsNewPerson(false)
+  
+  setConversation(localStorage.getItem("newUSERNAME"))
+
+
+
+}
+
+
+
+
+
+
+
 return(
   <>
 <NavigationBar/>
@@ -126,7 +162,7 @@ return(
       {
         messages.map((element)=>{
 return(
-  <Conversation key={element.user.userName} name={element.user.userName} { ...CheckIfanyMessages(element.messages)}  onClick={() => setConversation(element.user.userName) } active={conversation===element.user.userName}/>
+  <Conversation key={element.user.userName}  name={element.user.userName} { ...CheckIfanyMessages(element.messages)}  onClick={() => setConversation(element.user.userName) } active={conversation===element.user.userName}/>
 )
         })
       }
@@ -158,7 +194,7 @@ return(
   {indexOFMESSAGEFORUSER>=0 && <MessageInput placeholder="Type message here" value={messageInputValue} onChange={val => setMessageInputValue(val)} onSend={updateMessage} />}
   </ChatContainer></>:<NewChat goBack={()=>{
      setIsNewPerson(false)
-  }}/>
+  }} messages={messages} onSubmit={newUserSelected}/>
 
 }
 
