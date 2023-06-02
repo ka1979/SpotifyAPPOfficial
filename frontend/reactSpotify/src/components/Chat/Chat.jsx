@@ -5,10 +5,11 @@ import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css';
 import { CardContent } from '@mui/material';
 import { useState } from 'react';
 import NavigationBar from "../Navbar";
-
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 const Chat=()=>{
     const [conversation, setConversation] = useState(undefined);
-
+    const Navigate=useNavigate()
     const [messages, setMessages]=useState([
       {
         user:{name:"jim@gmail.com", userName:"Joe"},
@@ -89,7 +90,7 @@ const Chat=()=>{
 return(
   <>
 <NavigationBar/>
-    <MainContainer style={{width:"40rem", height:"40rem"}}>
+    <MainContainer style={{ borderRadius:"5px", marginTop:"100px", height:"80vh", width:"90vw", marginLeft:"2vw"}}>
 
     <Sidebar position="left" scrollable={true}>
     <CardContent
@@ -97,7 +98,9 @@ return(
               display: "flex",
               flexDirection: "row",
             }}
-          >    <Search placeholder="Search..." /><AddUserButton />
+          >    <Search placeholder="Search..." /><AddUserButton onClick={()=>{
+            Navigate("/newChat")
+          }} />
 
        </CardContent>
    
@@ -106,7 +109,7 @@ return(
       {
         messages.map((element)=>{
 return(
-  <Conversation name={element.user.userName} { ...getInfoAndLastSender(element.messages[element.messages.length-1])}  onClick={() => setConversation(element.user.userName) } active={conversation===element.user.userName}/>
+  <Conversation key={element.user.userName} name={element.user.userName} { ...getInfoAndLastSender(element.messages[element.messages.length-1])}  onClick={() => setConversation(element.user.userName) } active={conversation===element.user.userName}/>
 )
         })
       }
