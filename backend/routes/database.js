@@ -187,8 +187,11 @@ router.get("/all-users", async function (req, res, next) {
 
 router.post("/new-chat", async function (req, res, next) {
   try {
-    const object = req.body;
-    setDoc(doc(db, "Messages", req.body.id), object);
+ 
+    const object = req.body.newObject;
+    console.log(object)
+    const documentRef = doc(db, "Messages", customId);
+    await set(documentRef, object);
   } catch (error) {
     console.error("Error fetching data:", error);
   }

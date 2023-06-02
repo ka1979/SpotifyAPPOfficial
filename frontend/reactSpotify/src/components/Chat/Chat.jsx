@@ -21,6 +21,7 @@ import { useEffect } from "react";
 import { AppStateContext } from "../../AppState";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import axios from "axios";
+import {v4 as uniqueId} from "uuid"
 
 const Chat = () => {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -43,36 +44,7 @@ const Chat = () => {
   const [isNewperson, setIsNewPerson] = useState(false);
   const [conversation, setConversation] = useState(undefined);
   const [messages, setMessages] = useState([
-    // {
-    //   user:[{email:"jim@gmail.com", userName:"Joe"},{email:"akproductions2002@gmail.com", userName:"yang"}],
-    //   messages:[
-    //     {
-    //       message:"what up",
-    //       sender:"jim@gmail.com",
-    //       position:"single"
-    //     },
-    //     {
-    //       message:"not much tbh",
-    //       sender:"akproductions2002@gmail.com",
-    //       position:"single"
-    //     }
-    //   ]
-    // },
-    // {
-    //   user:[{email:"jimdffadsfasdfasdfaf@gmail.com", userName:"Lilly"},{email:"akproductions2002@gmail.com", userName:"yang"}],
-    //   messages:[
-    //     {
-    //       message:"how are you",
-    //       sender:"akproductions2002@gmail.com",
-    //       position:"single"
-    //     },
-    //     {
-    //       message:".....",
-    //       sender:"jimdffadsfasdfasdfaf@gmail.com",
-    //       position:"single"
-    //     }
-    //   ]
-    // }
+
   ]);
   useEffect(() => {
     const getUsers = async () => {
@@ -109,6 +81,23 @@ const Chat = () => {
     };
 
     if (newMessagePage.length===0){
+
+      try {
+        // Make an HTTP request to the Express.js backend using Axios
+        const response = await axios.post('http://localhost:3000/database/new-chat', { newObject:updatedValue, id:DocIds[indexOFMESSAGEFORUSER] });
+        // Handle the response and update the UI
+
+        console.log(response.data);
+     
+      } catch (error) {
+        // Handle any errors
+        console.error(error);
+      }
+
+
+
+
+
 
     }else{
       try {
@@ -162,12 +151,19 @@ const Chat = () => {
 
     console.log();
     newMessages.unshift({
-      user: {
-        name: localStorage.getItem("newUSEREmail"),
+      users: [{
+        email: localStorage.getItem("newUSEREmail"),
         userName: localStorage.getItem("newUSERNAME"),
-      },
+      },{email: email,
+      userName: myUSERNAME}],
       messages: [],
     });
+  
+    const id=uniqueId()
+
+    const newDocId=[...DocIds]
+    newDocId.unshift(id)
+    setDocIds(newDocId)
     setMessages(newMessages);
     setIsNewPerson(false);
 
