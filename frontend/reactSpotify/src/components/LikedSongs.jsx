@@ -36,28 +36,28 @@ export default function LikedSongs() {
 
   return (
     <>
-    <Helmet>
-    <title>Liked Songs</title>
-  </Helmet>
-    <div style={{ alignItems: "center" }}>
-      <NavigationBar page="liked" />
-      <div className="view-container">
-        <h1 className="white-text">Recently Liked Songs</h1>
-        <div className="cards-container">
-          {likedSongs.map((track, index) => (
-            <div className="top-card">
-              <img src={track.image}></img>
-              <div className="description">
-                <p className="top-title">{track.title}</p>
-                {track.artists.map((artist, index) => (
-                  <p>{artist}</p>
-                ))}
+      <Helmet>
+        <title>Liked Songs</title>
+      </Helmet>
+      <div style={{ alignItems: "center" }}>
+        <NavigationBar page="liked" />
+        <div className="view-container">
+          <h1 className="white-text">Recently Liked Songs</h1>
+          <div className="cards-container">
+            {likedSongs.map((track, index) => (
+              <div className="top-card">
+                <img src={track.image}></img>
+                <div className="description">
+                  <p className="top-title">{track.title}</p>
+                  {track.artists.map((artist, index) => (
+                    <p>{artist}</p>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

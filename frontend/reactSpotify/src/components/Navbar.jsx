@@ -13,7 +13,6 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 // import Box from '@mui/material/Box';
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Stack from "@mui/material/Stack";
-import Person2Icon from "@mui/icons-material/Person2";
 
 const NavigationLink = styled(RouterLink)(({ theme }) => ({
   textDecoration: "none",
@@ -256,7 +255,6 @@ const NavigationBar = ({ page }) => {
                 </NavigationButton>
               </NavigationLink>
               <NavigationLink to="/profile">
-                {/* <Person2Icon sx={{ color: "white" }} /> */}
                 <NavigationButton
                   style={
                     page === "profile" ? { backgroundColor: "#537FE7" } : null

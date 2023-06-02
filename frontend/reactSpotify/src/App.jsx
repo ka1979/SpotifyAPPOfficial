@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from './components/login';
@@ -19,7 +16,7 @@ import Forums from "./components/Forums";
 import Profile from "./components/Profile";
 import LikedSongs from "./components/LikedSongs";
 
-import Posts from "./components/Posts"; 
+import Posts from "./components/Posts";
 
 
 
@@ -30,9 +27,6 @@ import UserPage from "./components/UserPage";
 
 
 function App() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // this state should be managed with authentication state
-
-  // [isLoggedIn, setIsLoggedIn] = useState(false); // this state should be managed with authentication state
   return (
     <Routes>
       <Route path="/" element={<Login />} />

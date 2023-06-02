@@ -66,92 +66,92 @@ export default function TopTracks() {
 
   return (
     <>
-    <Helmet>
-    <title>Top Artists</title>
-  </Helmet>
-    <div style={{ alignItems: "center" }}>
-      <NavigationBar page="top-artists" />
-      <div className="view-container">
-        <h1 className="white-text">
-          {showingTopArtistsLong
-            ? "All Time Top Artists"
-            : showingTopArtistsMedium
-            ? "Last 6 Months' Top Artists"
-            : "Last Month's Top Artists"}
-        </h1>
-        <div className="time-buttons">
-          <Button
-            style={{ margin: "10px" }}
-            variant="contained"
-            onClick={() => {
-              setShowingTopArtistsLong(true);
-              setShowingTopArtistsMedium(false);
-              setShowingTopArtistsShort(false);
-            }}
-          >
-            All-time
-          </Button>
-          <Button
-            style={{ margin: "10px" }}
-            variant="contained"
-            onClick={() => {
-              setShowingTopArtistsLong(false);
-              setShowingTopArtistsMedium(true);
-              setShowingTopArtistsShort(false);
-            }}
-          >
-            Last 6 Months
-          </Button>
-          <Button
-            style={{ margin: "10px" }}
-            variant="contained"
-            onClick={() => {
-              setShowingTopArtistsLong(false);
-              setShowingTopArtistsMedium(false);
-              setShowingTopArtistsShort(true);
-            }}
-          >
-            Last Month
-          </Button>
+      <Helmet>
+        <title>Top Artists</title>
+      </Helmet>
+      <div style={{ alignItems: "center" }}>
+        <NavigationBar page="top-artists" />
+        <div className="view-container">
+          <h1 className="white-text">
+            {showingTopArtistsLong
+              ? "All Time Top Artists"
+              : showingTopArtistsMedium
+                ? "Last 6 Months' Top Artists"
+                : "Last Month's Top Artists"}
+          </h1>
+          <div className="time-buttons">
+            <Button
+              style={{ margin: "10px" }}
+              variant="contained"
+              onClick={() => {
+                setShowingTopArtistsLong(true);
+                setShowingTopArtistsMedium(false);
+                setShowingTopArtistsShort(false);
+              }}
+            >
+              All-time
+            </Button>
+            <Button
+              style={{ margin: "10px" }}
+              variant="contained"
+              onClick={() => {
+                setShowingTopArtistsLong(false);
+                setShowingTopArtistsMedium(true);
+                setShowingTopArtistsShort(false);
+              }}
+            >
+              Last 6 Months
+            </Button>
+            <Button
+              style={{ margin: "10px" }}
+              variant="contained"
+              onClick={() => {
+                setShowingTopArtistsLong(false);
+                setShowingTopArtistsMedium(false);
+                setShowingTopArtistsShort(true);
+              }}
+            >
+              Last Month
+            </Button>
+          </div>
+          {showingTopArtistsLong && (
+            <div className="cards-container">
+              {topArtistsLong.map((artist, index) => (
+                <div className="top-card">
+                  <img src={artist.image}></img>
+                  <div className="description">
+                    <p className="top-title">{artist.name}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          {showingTopArtistsMedium && (
+            <div className="cards-container">
+              {topArtistsMedium.map((artist, index) => (
+                <div className="top-card">
+                  <img src={artist.image}></img>
+                  <div className="description">
+                    <p className="top-title">{artist.name}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          {showingTopArtistsShort && (
+            <div className="cards-container">
+              {topArtistsShort.map((artist, index) => (
+                <div className="top-card">
+                  <img src={artist.image}></img>
+                  <div className="description">
+                    <p className="top-title">{artist.name}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        {showingTopArtistsLong && (
-          <div className="cards-container">
-            {topArtistsLong.map((artist, index) => (
-              <div className="top-card">
-                <img src={artist.image}></img>
-                <div className="description">
-                  <p className="top-title">{artist.name}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-        {showingTopArtistsMedium && (
-          <div className="cards-container">
-            {topArtistsMedium.map((artist, index) => (
-              <div className="top-card">
-                <img src={artist.image}></img>
-                <div className="description">
-                  <p className="top-title">{artist.name}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-        {showingTopArtistsShort && (
-          <div className="cards-container">
-            {topArtistsShort.map((artist, index) => (
-              <div className="top-card">
-                <img src={artist.image}></img>
-                <div className="description">
-                  <p className="top-title">{artist.name}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
-    </div>
     </>
   );
 }

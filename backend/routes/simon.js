@@ -25,7 +25,6 @@ router.get("/public-users", async function (req, res, next) {
   querySnapshot.forEach((doc) => {
     ret.push(doc.data());
   });
-  console.log(ret);
   res.json({ result: ret });
 });
 
@@ -37,7 +36,6 @@ router.post("/user", async function (req, res, next) {
   querySnapshot.forEach((doc) => {
     ret = doc.data();
   });
-  //   console.log("user object", ret);
   res.json({ result: ret });
 });
 

@@ -77,8 +77,8 @@ export default function TopTracks() {
             {showingTopTracksLong
               ? "All Time Top Tracks"
               : showingTopTracksMedium
-              ? "Last 6 Months' Top Tracks"
-              : "Last Month's Top Tracks"}
+                ? "Last 6 Months' Top Tracks"
+                : "Last Month's Top Tracks"}
           </h1>
           <div className="time-buttons">
             <Button

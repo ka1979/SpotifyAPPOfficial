@@ -33,11 +33,10 @@ export default function LandingPage() {
     if (email) user = email;
     setAppState((prevState) => ({
       ...prevState,
-      user:email,
+      user: email,
     }));
     localStorage.setItem("email", email)
   }, [email]);
-  console.log(appState.user)
 
 
 
@@ -47,7 +46,6 @@ export default function LandingPage() {
       const response = await axios.get(
         `http://localhost:3000/spotify/user?access_token=${accessToken}`
       );
-      console.log(response.data.email);
       setEmail(response.data.email);
     };
     fetchUser();
@@ -59,33 +57,33 @@ export default function LandingPage() {
 
   return email ? (
     <>
-    <Helmet>
-    <title>Spotify Social</title>
-  </Helmet>
-    <div className="blue-container">
-      <h1 className="white-text">Welcome</h1>
-      <div className="shadow-container">
-        <p>
-          We have successfully linked to your Spotify account with the following
-          email:
-        </p>
-        <p className="email">{email}</p>
+      <Helmet>
+        <title>Spotify Social</title>
+      </Helmet>
+      <div className="blue-container">
+        <h1 className="white-text">Welcome</h1>
+        <div className="shadow-container">
+          <p>
+            We have successfully linked to your Spotify account with the following
+            email:
+          </p>
+          <p className="email">{email}</p>
+        </div>
+        <Button
+          style={{ margin: "20px", backgroundColor: "white", color: "black" }}
+          variant="contained"
+          onClick={() => goHome()}
+        >
+          Continue to App
+        </Button>
       </div>
-      <Button
-        style={{ margin: "20px", backgroundColor: "white", color: "black" }}
-        variant="contained"
-        onClick={() => goHome()}
-      >
-        Continue to App
-      </Button>
-    </div>
     </>
   ) : (
     <>
-    <Helmet>
-    <title>Forums</title>
-  </Helmet>
-    <p>Loading...</p>
+      <Helmet>
+        <title>Forums</title>
+      </Helmet>
+      <p>Loading...</p>
     </>
   );
 }

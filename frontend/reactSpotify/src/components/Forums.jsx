@@ -77,7 +77,6 @@ const Forums = () => {
         title: newForumTitle,
         creator: creator,
       });
-      console.log(response.data);
 
       fetchForums();
       setNewForumTitle("");

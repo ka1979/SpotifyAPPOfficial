@@ -52,11 +52,6 @@ const Login = () => {
           </h3>
         </div>
         <LoginButton
-          // style={{
-          //   margin: "30px 10px 10px 10px",
-          //   color: "black",
-          //   backgroundColor: "white",
-          // }}
           onClick={handleLogin}
         >
           <LoginIcon style={{ marginRight: "10px" }} />

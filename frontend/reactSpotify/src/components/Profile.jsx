@@ -1,6 +1,5 @@
 import { React, useState, useEffect } from "react";
 import NavigationBar from "./Navbar";
-import { user } from "./LandingPage";
 import axios from "axios";
 import Switch from "react-switch";
 import { BsFillLockFill, BsFillUnlockFill } from "react-icons/bs";
@@ -15,7 +14,7 @@ export default function Profile() {
   }
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
-  const [isPublic, setIsPublic] = useState("false");
+  const [isPublic, setIsPublic] = useState(false);
   const handleSwitch = async (e) => {
     setIsPublic(e);
     try {
@@ -26,10 +25,6 @@ export default function Profile() {
           isPublic: isPublic,
         }
       );
-      // setName(response.data.result.name);
-      // setIsPublic(response.data.result.isPublic);
-      console.log(response.data.result.name);
-      console.log(response.data.result.isPublic);
     } catch (error) {
       console.error(error); // Handle any errors that occur
     }
@@ -42,8 +37,6 @@ export default function Profile() {
       setName(response.data.result.name);
       setIsPublic(response.data.result.isPublic);
       setImage(response.data.result.image);
-      console.log(response.data.result.name);
-      console.log(response.data.result.isPublic);
     } catch (error) {
       console.error(error); // Handle any errors that occur
     }
@@ -114,10 +107,10 @@ export default function Profile() {
               className="shadow-container"
               style={{ marginTop: "10px", padding: "5px" }}
             >
-              <h7 className="white-text" style={{ marginTop: "10px" }}>
+              <h5 className="white-text" style={{ marginTop: "10px" }}>
                 When your profile is public, other users can see your name, top
                 songs, top artists, and liked songs on the discover page
-              </h7>
+              </h5>
             </div>
           </div>
         </div>

@@ -25,15 +25,14 @@ export default function Discover() {
   }, []);
 
   const goToUserProfile = (email) => {
-    console.log("going to profile: ", email);
     navigate(`/user/${email}`);
   };
 
   return (
     <>
-    <Helmet>
-      <title>Discover</title>
-    </Helmet>
+      <Helmet>
+        <title>Discover</title>
+      </Helmet>
       <NavigationBar page="discover" />
       <div className="view-container">
         <h1 className="white-text">Discover</h1>

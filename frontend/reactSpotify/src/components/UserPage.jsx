@@ -38,10 +38,10 @@ export default function UserPage() {
   return (
     <>
 
-    <Helmet>
-    <title> {name}</title>
-    </Helmet>
-    <NavigationBar page="discover" />
+      <Helmet>
+        <title> {name}</title>
+      </Helmet>
+      <NavigationBar page="discover" />
 
 
       <div className="view-container">

@@ -57,23 +57,4 @@ router.post("/:id/like", async (req, res) => {
     res.json({ postId, likes: post.likes });
   });
 });
-
-// router.post('/:id/like', async (req, res) => {
-//   const { forumId, postId } = req.body;
-//   const forumRef = doc(db, 'forums', forumId);
-
-//   await runTransaction(db, async (transaction) => {
-//     const forumDoc = await transaction.get(forumRef);
-//     const posts = forumDoc.data().posts;
-//     const post = posts.find(post => post.id === postId);
-//     if (!post) {
-//       throw "Post not found";
-//     }
-//     post.likes++;
-//     transaction.update(forumRef, { posts });
-//   });
-
-//   res.json({ postId, likes: post.likes });
-// });
-
 module.exports = router;
