@@ -17,6 +17,38 @@ const {
 router.get("/", function (req, res, next) {
   res.send("database api");
 });
+const getUserConversations = async (userName, email) => {
+  try {    
+
+    const q = query(collection(db, 'Messages'), where('users', 'array-contains', { email, userName }));
+    const querySnapshot = await getDocs(q);
+    const conversations = [];
+    const DocIds=[]
+    querySnapshot.forEach((doc) => {
+      const conversation = doc.data();
+      conversations.push(conversation);
+      DocIds.push(doc.id)
+    });
+    
+    return {conversations,DocIds};
+  } catch (error) {
+    console.log('Error getting user conversations:', error);
+    return [];
+  }
+};
+router.get("/getMessages",async function (req, res, next) {
+console.log(req.query.username)
+console.log(req.query.email)
+
+  try {
+    const responseData = await getUserConversations(req.query.username,req.query.email);
+    console.log(responseData);
+    res.json({ responseData });
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+  
+});
 
 router.post("/top-tracks-long", async function (req, res, next) {
   const email = req.body.email;
@@ -135,5 +167,8 @@ router.get("/all-users", async function (req, res, next) {
   }
 
 });
+
+
+
 
 module.exports = router;
