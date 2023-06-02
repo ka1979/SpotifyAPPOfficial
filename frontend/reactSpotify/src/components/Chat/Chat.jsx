@@ -39,7 +39,7 @@ const Chat = () => {
     }
     return null; // Return null if no user with matching email is found
   };
-
+  const [DocIds, setDocIds]=useState([])
   const [isNewperson, setIsNewPerson] = useState(false);
   const [conversation, setConversation] = useState(undefined);
   const [messages, setMessages] = useState([
@@ -81,6 +81,7 @@ const Chat = () => {
           `http://localhost:3000/database/getMessages?username=${myUSERNAME}&email=${email}`
         );
         setMessages(res.data.responseData.conversations);
+        setDocIds(res.data.responseData.DocIds)
       } catch (error) {
         console.log(error);
       }
@@ -93,7 +94,8 @@ const Chat = () => {
     return getUser(element.users).userName === conversation;
   });
 
-  const updateMessage = () => {
+
+  const updateMessage = async() => {
     const getMsg = messageInputValue;
     const newMessagePage = [...messages[indexOFMESSAGEFORUSER].messages];
     newMessagePage.push({
@@ -105,6 +107,30 @@ const Chat = () => {
       ...messages[indexOFMESSAGEFORUSER],
       messages: newMessagePage,
     };
+
+    if (newMessagePage.length===0){
+
+    }else{
+      try {
+        // Make an HTTP request to the Express.js backend using Axios
+        const response = await axios.post('http://localhost:3000/database/addMessageExisting', { messageUpdated:updatedValue, id:DocIds[indexOFMESSAGEFORUSER] });
+        // Handle the response and update the UI
+        console.log(response.data);
+      } catch (error) {
+        // Handle any errors
+        console.error(error);
+      }
+    }
+
+
+
+
+
+  
+
+///put axios call
+
+
     const newArray = [...messages];
     newArray[indexOFMESSAGEFORUSER] = updatedValue;
     setMessages(newArray);
@@ -150,6 +176,7 @@ const Chat = () => {
 
   return (
     <>
+    {console.log(messages[indexOFMESSAGEFORUSER])}
       <NavigationBar page="chat" />
       <div className="view-container">
         <MainContainer
