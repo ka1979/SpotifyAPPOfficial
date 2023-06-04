@@ -14,7 +14,6 @@
     "@chatscope/chat-ui-kit-styles": "^1.4.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "@esbuild/darwin-arm64": "^0.17.19",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",

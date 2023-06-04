@@ -74,13 +74,13 @@ router.get("/login", function (req, res) {
 
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
-    querystring.stringify({
-      response_type: "code",
-      client_id: client_id,
-      scope: scope,
-      redirect_uri: redirect_uri,
-      state: state,
-    })
+      querystring.stringify({
+        response_type: "code",
+        client_id: client_id,
+        scope: scope,
+        redirect_uri: redirect_uri,
+        state: state,
+      })
   );
 });
 
@@ -91,9 +91,9 @@ router.get("/callback", function (req, res) {
   if (state === null) {
     res.redirect(
       "/#" +
-      querystring.stringify({
-        error: "state_mismatch",
-      })
+        querystring.stringify({
+          error: "state_mismatch",
+        })
     );
   } else {
     var authOptions = {
@@ -113,7 +113,6 @@ router.get("/callback", function (req, res) {
 
     request.post(authOptions, function (error, response, body) {
       if (!error && response.statusCode === 200) {
-
         var access_token = body.access_token,
           refresh_token = body.refresh_token;
 
@@ -168,6 +167,7 @@ router.get("/callback", function (req, res) {
         // use the access token to access the Spotify Web API
         // TODO: need to make this one run first
         request.get(meOptions, function (error, response, body) {
+          console.log(body);
           if (body.images.length > 0) {
             userObject.image = body.images[0].url;
           } else {
@@ -301,17 +301,17 @@ router.get("/callback", function (req, res) {
         });
         res.redirect(
           "http://localhost:5173/landing/#" +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token,
-          })
+            querystring.stringify({
+              access_token: access_token,
+              refresh_token: refresh_token,
+            })
         );
       } else {
         res.redirect(
           "http://localhost:5173/#" +
-          querystring.stringify({
-            error: "invalid_token",
-          })
+            querystring.stringify({
+              error: "invalid_token",
+            })
         );
       }
     });
