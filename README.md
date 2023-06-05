@@ -13,11 +13,9 @@ Spotify Social is an application used to connect Spotify listeners around the wo
 ### Installation
 In the reactSpotify directory:
 1. npm install (installs necessary dependencies)
-2. npm run dev (starts the frontend)
 
 In the backend directory:
 1. npm install (installs necessary dependencies)
-2. npm start (starts the backend server)
 
 
 ### How to Use
