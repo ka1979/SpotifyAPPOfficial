@@ -25,11 +25,11 @@ Since the app is still in development mode, there are a few extra steps needed t
 5. Add “http://localhost:3000/spotify/callback” (without quotes) to the redirect URI
 6. Copy down the client ID and client secret and save the app
 7. In the backend directory, add a .env file that has the following two lines of code:
-    CLIENT_ID = the client ID you copied down from the app
-    CLIENT_SECRET = the client secret you copied down from the app
-    Example .env file:
-    CLIENT_ID = dacb9382e8c09a8f
-    CLIENT_SECRET = djskfjl329n210n40nensk8201j
+    CLIENT_ID = the client ID you copied down from the app <br/>
+    CLIENT_SECRET = the client secret you copied down from the app <br/>
+    # Example .env file: <br/>
+    CLIENT_ID = dacb9382e8c09a8f <br/>
+    CLIENT_SECRET = djskfjl329n210n40nensk8201j<br/>
 8. Finally, in the backend folder create a file called ‘permissions.json’ and copy paste the following code into it:
 
 ### How to Use
