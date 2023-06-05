@@ -30,7 +30,14 @@ Since the app is still in development mode, there are a few extra steps needed t
     #### Example .env file: <br/>
     CLIENT_ID = dacb9382e8c09a8f <br/>
     CLIENT_SECRET = djskfjl329n210n40nensk8201j<br/>
-8. Finally, in the backend folder create a file called ‘permissions.json’ and copy paste the following code into it:
+To setup the google firebase:
+1. Go to https://firebase.google.com/docs/firestore and click ‘go to console’ in the top right corner
+2. Sign in with your google account, then click create an app (and fill out the details)
+3. Create a firestore database within the project you just created (put it in test mode while still in development)
+4. Go to settings -> project settings -> service accounts and click ‘generate a new private key’
+5. Take the file that was just downloaded, rename it to ‘permissions.json’, and move it to the backend folder of the code.
+6. Change the “project_id” to “projectId” (with quotes)
+
 
 ### How to Use
 
