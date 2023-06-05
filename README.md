@@ -11,6 +11,13 @@ Spotify Social is an application used to connect Spotify listeners around the wo
 5. Credits
 
 ### Installation
+In the reactSpotify directory:
+1. npm install (installs necessary dependencies)
+2. npm run dev (starts the frontend)
+
+In the backend directory:
+1. npm install (installs necessary dependencies)
+2. npm start (starts the backend server)
 
 
 ### How to Use
@@ -20,6 +27,7 @@ Spotify Social is an application used to connect Spotify listeners around the wo
 
 
 ### Status of Features
+Currently, all features are fully functional, with the minor exception of the chat page. We are working on fixing a bug where creating a new chat doesn’t display the first message until the page is refreshed. 
 
 
 ### Credits
