@@ -43,7 +43,7 @@ To setup the google firebase:
 ### How to Use
 
 
-### Major Components and Features
+### Major Components and Features:
 
 #### Liked Songs Page: 
 This page will display the user's 50 recent liked songs with name of song, name of artist along with their respective album pictures. It will retrieve the user's liked songs from the Spotify API.
