@@ -4,7 +4,7 @@
 Spotify Social is an application used to connect Spotify listeners around the world. By logging into your Spotify account through our app, you are agreeing that we can access your listening history, including liked songs, top songs, and top artists. Once logged in, Spotify Social is a place where you can view summaries of your own listening history, as well as explore other peoples’. For anyone who has a public account (which is editable on your profile page), they will be displayed on the Discover page, where other users can see your liked songs, top songs, and top artists. We have also added more social features to the application, such as a Forums page, where people can create forums, as well as create and interact with posts on specific forums. Additionally, we have added a chat feature where you can directly message other users of the application. Overall, the purpose of this app was to make Spotify a more connected experience and to allow for people to connect based on their music choices, which is a space that has been empty for too long now.
 
 ## Table of Contents
-1. Installation
+1. [Installation](#Installation)
 2. How to Use
 3. Major Components and Features
 4. Status of Features
@@ -45,15 +45,14 @@ To setup the google firebase:
 
 ### Major Components and Features
 
-## In the React Frontend Directory: 
-### Liked Songs Page: 
+#### Liked Songs Page: 
 This page will display the user's 50 recent liked songs with name of song, name of artist along with their respective album pictures. It will retrieve the user's liked songs from the Spotify API.
 
 
-### User's Top Artists Page: 
+#### User's Top Artists Page: 
 This page will show the user's top artists based on different time periods: <br/> All Time,<br/>  Last 6 months ,<br/>  and Last Month.<br/>  It will fetch this data from the Spotify API and display top artist and their profile picture.
 
-### User's Top Track’s Page: 
+#### User's Top Track’s Page: 
 Similar to the top artists page, this page will display the user's top songs based on different time periods. The data will be retrieved from the Spotify API and name of track, artist name and album picture will be displayed
 
 
@@ -63,27 +62,27 @@ Similar to the top artists page, this page will display the user's top songs bas
 
 
 
-### User Profile Page: 
+#### User Profile Page: 
 This page will allow users to view their profile information including their spotify profile picture, name, email. Additionally, users can control the privacy of their profiles using a toggle switch, making them public or private based on their preferences. If they choose to make their profile private, it will hide it from the Discover page.
 
 ![alt text](/Images/myProfile.png)
 
 
-### Discover Page: 
+#### Discover Page: 
 The discover page will display profiles of all public users. Users can click on a profile to view more details such as their top tracks of all time, top artist of all time and liked songs. 
 
 
 ![alt text](/Images/Discover.png)
 
 
-### Chat Page: 
+#### Chat Page: 
 The chat page will show the user's chats with other users. Users can send messages to each other, creating a communication channel within the application.
 
 
 
 ![alt text](/Images/Chat.png)
 
-### Forum Page: 
+#### Forum Page: 
 This page will display all the available discussion boards (forums). Users can click on a forum to access the posts within it. Users will also have the ability to search for forums by name, making it easier to find specific topics of interest.
 
 
@@ -91,7 +90,7 @@ This page will display all the available discussion boards (forums). Users can c
 ![alt text](/Images/Forums.png)
 
 
-### Posts Page:
+#### Posts Page:
 After clicking on specific forum,  users will be able to like posts within forums.
 
 ![alt text](/Images/Rap.png)
