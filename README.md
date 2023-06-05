@@ -5,7 +5,7 @@ Spotify Social is an application used to connect Spotify listeners around the wo
 
 ## Table of Contents
 1. [Installation](#Installation)
-2. How to Use
+2. [How to Use](#how-to-use)
 3. Major Components and Features
 4. Status of Features
 5. Credits
