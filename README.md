@@ -11,12 +11,26 @@ Spotify Social is an application used to connect Spotify listeners around the wo
 5. Credits
 
 ### Installation
-In the reactSpotify directory:
-1. npm install (installs necessary dependencies)
+In the reactSpotify directory: 
+run ‘npm install’ 
 
 In the backend directory:
-1. npm install (installs necessary dependencies)
+Run ‘npm install’ 
 
+Since the app is still in development mode, there are a few extra steps needed to set up.
+1. Go to https://developer.spotify.com/dashboard and log in with your spotify account
+2. Click on the ‘create app’ button and set a name and description for your app (you can leave the ‘website’ field blank)
+3. In the redirect URI, put “http://localhost:5173” (without quotes) and save the app
+4. After you save the app, click on settings in the top right followed by edit at the bottom
+5. Add “http://localhost:3000/spotify/callback” (without quotes) to the redirect URI
+6. Copy down the client ID and client secret and save the app
+7. In the backend directory, add a .env file that has the following two lines of code:
+    CLIENT_ID = the client ID you copied down from the app
+    CLIENT_SECRET = the client secret you copied down from the app
+    Example .env file:
+    CLIENT_ID = dacb9382e8c09a8f
+    CLIENT_SECRET = djskfjl329n210n40nensk8201j
+8. Finally, in the backend folder create a file called ‘permissions.json’ and copy paste the following code into it:
 
 ### How to Use
 
