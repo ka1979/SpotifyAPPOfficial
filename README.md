@@ -41,6 +41,8 @@ To setup the google firebase:
 
 
 ### How to Use
+On the login page, click the button to link your Spotify account. After logging in through Spotify, you will automatically be redirected to the landing page, where you can click the button to continue to the app. You will be taken to your profile page, where you can use the toggle switch to change between a private and public account. To view the different main pages of the app, use the buttons on the navigation bar, or in the hamburger menu if you are in mobile view. These buttons will take you to the different main pages of the app, but some of these pages have other pages you can access from them.On the discover page, click a user’s card to see their public profile, including their liked songs, top songs, and top artists. On your Top Tracks and Top Artist pages, click the different buttons to filter different time ranges. On the Forums page, click on a forum to view its posts and add posts to that specific forum. On the chat page, click on the “+” icon at the top to start a new chat or click on the boxes on the left hand side to change which chat you are currently viewing.
+
 
 
 ### Major Components and Features:
