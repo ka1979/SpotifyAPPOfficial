@@ -37,6 +37,57 @@ Since the app is still in development mode, there are a few extra steps needed t
 
 ### Major Components and Features
 
+## In the React Frontend Directory: 
+### Liked Songs Page: 
+This page will display the user's 50 recent liked songs with name of song, name of artist along with their respective album pictures. It will retrieve the user's liked songs from the Spotify API.
+
+
+### User's Top Artists Page: 
+This page will show the user's top artists based on different time periods: <br/> All Time,<br/>  Last 6 months ,<br/>  and Last Month.<br/>  It will fetch this data from the Spotify API and display top artist and their profile picture.
+
+### User's Top Track’s Page: 
+Similar to the top artists page, this page will display the user's top songs based on different time periods. The data will be retrieved from the Spotify API and name of track, artist name and album picture will be displayed
+
+
+
+![alt text](/Images/Top.png)
+
+
+
+
+### User Profile Page: 
+This page will allow users to view their profile information including their spotify profile picture, name, email. Additionally, users can control the privacy of their profiles using a toggle switch, making them public or private based on their preferences. If they choose to make their profile private, it will hide it from the Discover page.
+
+![alt text](/Images/myProfile.png)
+
+
+### Discover Page: 
+The discover page will display profiles of all public users. Users can click on a profile to view more details such as their top tracks of all time, top artist of all time and liked songs. 
+
+
+![alt text](/Images/Discover.png)
+
+
+### Chat Page: 
+The chat page will show the user's chats with other users. Users can send messages to each other, creating a communication channel within the application.
+
+
+
+![alt text](/Images/Chat.png)
+
+### Forum Page: 
+This page will display all the available discussion boards (forums). Users can click on a forum to access the posts within it. Users will also have the ability to search for forums by name, making it easier to find specific topics of interest.
+
+
+
+![alt text](/Images/Forums.png)
+
+
+### Posts Page:
+After clicking on specific forum,  users will be able to like posts within forums.
+
+![alt text](/Images/Rap.png)
+
 
 ### Status of Features
 Currently, all features are fully functional, with the minor exception of the chat page. We are working on fixing a bug where creating a new chat doesn’t display the first message until the page is refreshed. 
